@@ -37,11 +37,25 @@
             this.btnSparaKategori = new System.Windows.Forms.Button();
             this.btnTaBortKategori = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.tbURL = new System.Windows.Forms.TextBox();
+            this.btnNyPodcast = new System.Windows.Forms.Button();
+            this.btnSpara = new System.Windows.Forms.Button();
+            this.btnTaBortPodcast = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.lvPodcast = new System.Windows.Forms.ListView();
+            this.Avsnitt = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.cbUppFrek = new System.Windows.Forms.ComboBox();
+            this.cbKategori = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(598, 271);
+            this.button2.Location = new System.Drawing.Point(870, 463);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(102, 59);
@@ -73,7 +87,7 @@
             // 
             this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
-            this.listView1.Location = new System.Drawing.Point(173, 13);
+            this.listView1.Location = new System.Drawing.Point(12, 277);
             this.listView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.listView1.Name = "listView1";
             this.listView1.Size = new System.Drawing.Size(528, 245);
@@ -120,11 +134,128 @@
             this.textBox1.Size = new System.Drawing.Size(239, 22);
             this.textBox1.TabIndex = 8;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(13, 176);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(40, 17);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "URL:";
+            // 
+            // tbURL
+            // 
+            this.tbURL.Location = new System.Drawing.Point(16, 200);
+            this.tbURL.Name = "tbURL";
+            this.tbURL.Size = new System.Drawing.Size(243, 22);
+            this.tbURL.TabIndex = 10;
+            // 
+            // btnNyPodcast
+            // 
+            this.btnNyPodcast.Location = new System.Drawing.Point(309, 230);
+            this.btnNyPodcast.Name = "btnNyPodcast";
+            this.btnNyPodcast.Size = new System.Drawing.Size(88, 23);
+            this.btnNyPodcast.TabIndex = 11;
+            this.btnNyPodcast.Text = "Ny Podcast";
+            this.btnNyPodcast.UseVisualStyleBackColor = true;
+            // 
+            // btnSpara
+            // 
+            this.btnSpara.Location = new System.Drawing.Point(403, 230);
+            this.btnSpara.Name = "btnSpara";
+            this.btnSpara.Size = new System.Drawing.Size(75, 23);
+            this.btnSpara.TabIndex = 12;
+            this.btnSpara.Text = "Spara";
+            this.btnSpara.UseVisualStyleBackColor = true;
+            // 
+            // btnTaBortPodcast
+            // 
+            this.btnTaBortPodcast.Location = new System.Drawing.Point(483, 230);
+            this.btnTaBortPodcast.Name = "btnTaBortPodcast";
+            this.btnTaBortPodcast.Size = new System.Drawing.Size(75, 23);
+            this.btnTaBortPodcast.TabIndex = 13;
+            this.btnTaBortPodcast.Text = "Ta bort";
+            this.btnTaBortPodcast.UseVisualStyleBackColor = true;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(273, 176);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(151, 17);
+            this.label3.TabIndex = 14;
+            this.label3.Text = "Uppdateringsfrekvens:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(434, 176);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(65, 17);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "Kategori:";
+            // 
+            // lvPodcast
+            // 
+            this.lvPodcast.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Avsnitt,
+            this.columnHeader2,
+            this.columnHeader3,
+            this.columnHeader4});
+            this.lvPodcast.Location = new System.Drawing.Point(16, 13);
+            this.lvPodcast.Name = "lvPodcast";
+            this.lvPodcast.Size = new System.Drawing.Size(524, 133);
+            this.lvPodcast.TabIndex = 16;
+            this.lvPodcast.UseCompatibleStateImageBehavior = false;
+            this.lvPodcast.View = System.Windows.Forms.View.Details;
+            // 
+            // Avsnitt
+            // 
+            this.Avsnitt.Text = "Avsnitt";
+            // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Namn";
+            // 
+            // columnHeader3
+            // 
+            this.columnHeader3.Text = "Frekvens";
+            // 
+            // columnHeader4
+            // 
+            this.columnHeader4.Text = "Kategori";
+            // 
+            // cbUppFrek
+            // 
+            this.cbUppFrek.FormattingEnabled = true;
+            this.cbUppFrek.Location = new System.Drawing.Point(276, 198);
+            this.cbUppFrek.Name = "cbUppFrek";
+            this.cbUppFrek.Size = new System.Drawing.Size(121, 24);
+            this.cbUppFrek.TabIndex = 17;
+            // 
+            // cbKategori
+            // 
+            this.cbKategori.FormattingEnabled = true;
+            this.cbKategori.Location = new System.Drawing.Point(437, 200);
+            this.cbKategori.Name = "cbKategori";
+            this.cbKategori.Size = new System.Drawing.Size(121, 24);
+            this.cbKategori.TabIndex = 18;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(993, 533);
+            this.Controls.Add(this.cbKategori);
+            this.Controls.Add(this.cbUppFrek);
+            this.Controls.Add(this.lvPodcast);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.btnTaBortPodcast);
+            this.Controls.Add(this.btnSpara);
+            this.Controls.Add(this.btnNyPodcast);
+            this.Controls.Add(this.tbURL);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.btnTaBortKategori);
             this.Controls.Add(this.btnSparaKategori);
@@ -154,6 +285,20 @@
         private System.Windows.Forms.Button btnSparaKategori;
         private System.Windows.Forms.Button btnTaBortKategori;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox tbURL;
+        private System.Windows.Forms.Button btnNyPodcast;
+        private System.Windows.Forms.Button btnSpara;
+        private System.Windows.Forms.Button btnTaBortPodcast;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ListView lvPodcast;
+        private System.Windows.Forms.ColumnHeader Avsnitt;
+        private System.Windows.Forms.ColumnHeader columnHeader2;
+        private System.Windows.Forms.ColumnHeader columnHeader3;
+        private System.Windows.Forms.ColumnHeader columnHeader4;
+        private System.Windows.Forms.ComboBox cbUppFrek;
+        private System.Windows.Forms.ComboBox cbKategori;
     }
 }
 
