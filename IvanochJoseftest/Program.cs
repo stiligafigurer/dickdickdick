@@ -17,6 +17,8 @@ namespace IvanochJoseftest
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
+
+            //Nu blir det åka av!
         }
     }
 }
