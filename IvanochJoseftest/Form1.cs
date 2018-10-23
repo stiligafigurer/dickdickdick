@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using System.ServiceModel.Syndication;
+using System.IO;
 
 namespace IvanochJoseftest
 {
@@ -17,6 +18,7 @@ namespace IvanochJoseftest
         public Form1()
         {
             InitializeComponent();
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -32,7 +34,8 @@ namespace IvanochJoseftest
                     string namn = item.Title.Text;
                     listView1.Items.Add(namn);
                 }
-            
+            saveStuff();
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -44,5 +47,17 @@ namespace IvanochJoseftest
         {
 
         }
+
+        private void saveStuff() {
+            var fs = new FileStream(@"text.txt", FileMode.Create, FileAccess.Write);
+            var sw = new StreamWriter(fs);
+            for(var i = 1; i < listView1.Items.Count; i++)
+            {
+                sw.WriteLine(listView1.Items[i].Text);
+                
+            }
+            sw.Close();
+
+        }    
     }
 }
