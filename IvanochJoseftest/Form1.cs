@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
+using System.ServiceModel.Syndication;
 
 namespace IvanochJoseftest
 {
@@ -20,6 +22,17 @@ namespace IvanochJoseftest
         private void button2_Click(object sender, EventArgs e)
         {
             button2.Text = "B=======D";
+            
+                string url = @"https://cdn.radioplay.se/data/rss/490.xml";
+                XmlReader reader = XmlReader.Create(url);
+                SyndicationFeed feed = SyndicationFeed.Load(reader);
+                reader.Close();
+                foreach (SyndicationItem item in feed.Items)
+                {
+                    string namn = item.Title.Text;
+                    listView1.Items.Add(namn);
+                }
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
