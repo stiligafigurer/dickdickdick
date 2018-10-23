@@ -26,5 +26,10 @@ namespace IvanochJoseftest
         {
             Console.WriteLine("Jävla github");
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
