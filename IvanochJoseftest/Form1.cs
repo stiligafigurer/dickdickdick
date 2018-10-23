@@ -16,5 +16,10 @@ namespace IvanochJoseftest
         {
             InitializeComponent();
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            button2.Text = "B=======D";
+        }
     }
 }
