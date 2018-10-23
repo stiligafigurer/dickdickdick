@@ -19,6 +19,9 @@ namespace IvanochJoseftest
             Application.Run(new Form1());
 
             //Nu blir det åka av!
+
+            //Aj ajajajaj!!
+
         }
     }
 }
