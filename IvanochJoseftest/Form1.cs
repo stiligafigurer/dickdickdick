@@ -31,8 +31,8 @@ namespace IvanochJoseftest
                 reader.Close();
                 foreach (SyndicationItem item in feed.Items)
                 {
-                    string namn = item.Title.Text;
-                    listView1.Items.Add(namn);
+                    string[] PodContent = item.Title.Text.Split('.');
+                lvPodcast.Items.Add(PodContent[0]).SubItems.Add(PodContent[1]);
                 }
             saveStuff();
 
@@ -49,7 +49,7 @@ namespace IvanochJoseftest
         }
 
         private void saveStuff() {
-            var fs = new FileStream(@"text.txt", FileMode.Create, FileAccess.Write);
+            var fs = new FileStream(@"text.xml", FileMode.Create, FileAccess.Write);
             var sw = new StreamWriter(fs);
             for(var i = 1; i < listView1.Items.Count; i++)
             {
