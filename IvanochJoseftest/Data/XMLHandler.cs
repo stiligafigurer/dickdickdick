@@ -10,13 +10,13 @@ namespace IvanochJoseftest.Data
 {
     class XMLHandler
     {
-        public SortedList<string, string> GetXML(string url)
+        public Dictionary<string, string> GetXML(string url)
         {
             url = @"https://cdn.radioplay.se/data/rss/490.xml";
             XmlReader reader = XmlReader.Create(url);
             SyndicationFeed feed = SyndicationFeed.Load(reader);
             reader.Close();
-            SortedList<string, string> myList = new SortedList<string, string>();
+            Dictionary<string, string> myList = new Dictionary<string, string>();
             foreach (SyndicationItem item in feed.Items)
             {
                 string[] PodContent = item.Title.Text.Split('.');

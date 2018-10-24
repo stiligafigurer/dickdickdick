@@ -29,9 +29,10 @@ namespace IvanochJoseftest
             var nameAndEpisode = xmlHandler.GetXML(tbURL.Text);
             for(int i = 0; i < nameAndEpisode.Count; i++)
             {
-                int episodeNumber = i;
-                string name = nameAndEpisode.TryGetValue;
-                lvPodcast.Items.Add(PodContent[0]).SubItems.Add(PodContent[1]);
+                string episodeNumber = i.ToString();
+                string name;
+                nameAndEpisode.TryGetValue(episodeNumber, out name);
+                lvPodcast.Items.Add(episodeNumber).SubItems.Add(name);
             }
             
             saveStuff();
