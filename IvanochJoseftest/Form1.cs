@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Xml;
 using System.ServiceModel.Syndication;
 using System.IO;
+using IvanochJoseftest.Data;
 
 namespace IvanochJoseftest
 {
@@ -24,16 +25,16 @@ namespace IvanochJoseftest
         private void button2_Click(object sender, EventArgs e)
         {
             button2.Text = "B=======D";
+            XMLHandler xmlHandler = new XMLHandler();
+            var nameAndEpisode = xmlHandler.GetXML(tbURL.Text);
+            for(int i = 0; i < nameAndEpisode.Count; i++)
+            {
+                string episodeNumber = i.ToString();
+                string name;
+                nameAndEpisode.TryGetValue(episodeNumber, out name);
+                lvPodcast.Items.Add(episodeNumber).SubItems.Add(name);
+            }
             
-                string url = @"https://cdn.radioplay.se/data/rss/490.xml";
-                XmlReader reader = XmlReader.Create(url);
-                SyndicationFeed feed = SyndicationFeed.Load(reader);
-                reader.Close();
-                foreach (SyndicationItem item in feed.Items)
-                {
-                    string[] PodContent = item.Title.Text.Split('.');
-                lvPodcast.Items.Add(PodContent[0]).SubItems.Add(PodContent[1]);
-                }
             saveStuff();
 
         }
