@@ -59,6 +59,44 @@ namespace IvanochJoseftest
             }
             sw.Close();
 
-        }    
+        }
+
+        List<string> kategorier = new List<string>();
+
+        private void btnNyKategori_Click(object sender, EventArgs e)
+        {
+            
+
+            var kategorinamn = tbKategori.Text;
+
+            kategorier.Add(kategorinamn);
+
+            foreach (string item in kategorier)
+            {
+                lbKategori.Items.Add(item);
+
+                
+            }
+            kategorier.Sort();
+
+            UpdateList();
+
+            tbKategori.Clear();
+
+
+        }
+
+        private void UpdateList()
+        {
+            lbKategori.Items.Clear();
+
+            foreach (var kategori in kategorier)
+            {
+                lbKategori.Items.Add(
+                kategori
+                );
+            }
+            
+        }
     }
 }
