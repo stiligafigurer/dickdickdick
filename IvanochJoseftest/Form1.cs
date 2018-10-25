@@ -11,6 +11,7 @@ using System.Xml;
 using System.ServiceModel.Syndication;
 using System.IO;
 using IvanochJoseftest.Data;
+using IvanochJoseftest.Business;
 
 namespace IvanochJoseftest
 {
@@ -87,9 +88,20 @@ public partial class Form1 : Form
             }
         }
 
+        private void FillCB()
+        {
+            cbKategori.Items.Clear();
+
+            foreach (var kategori in kategorier)
+            {
+                cbKategori.Items.Add(kategori);
+            }
+        }
+
     private void btnNyKategori_Click_1(object sender, EventArgs e)
     {
-        var kategorinamn = tbKategori.Text;
+            //Validering.TomtFalt();
+            var kategorinamn = tbKategori.Text;
 
             kategorier.Add(kategorinamn);
 
@@ -105,7 +117,13 @@ public partial class Form1 : Form
 
             tbKategori.Clear();
 
+            FillCB();
 
+        }
+
+        private void tbKategori_TextChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }
