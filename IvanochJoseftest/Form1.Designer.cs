@@ -31,8 +31,8 @@
             this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lbKategori = new System.Windows.Forms.ListBox();
-            this.listView1 = new System.Windows.Forms.ListView();
-            this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lvEpisodes = new System.Windows.Forms.ListView();
+            this.Namn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnNyKategori = new System.Windows.Forms.Button();
             this.btnSparaKategori = new System.Windows.Forms.Button();
             this.btnTaBortKategori = new System.Windows.Forms.Button();
@@ -51,6 +51,8 @@
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cbUppFrek = new System.Windows.Forms.ComboBox();
             this.cbKategori = new System.Windows.Forms.ComboBox();
+            this.Nummer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Datum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // button2
@@ -84,22 +86,24 @@
             this.lbKategori.Size = new System.Drawing.Size(268, 204);
             this.lbKategori.TabIndex = 3;
             // 
-            // listView1
+            // lvEpisodes
             // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.columnHeader1});
-            this.listView1.Location = new System.Drawing.Point(14, 346);
-            this.listView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(594, 305);
-            this.listView1.TabIndex = 4;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.lvEpisodes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Nummer,
+            this.Namn,
+            this.Datum});
+            this.lvEpisodes.Location = new System.Drawing.Point(14, 346);
+            this.lvEpisodes.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.lvEpisodes.Name = "lvEpisodes";
+            this.lvEpisodes.Size = new System.Drawing.Size(594, 305);
+            this.lvEpisodes.TabIndex = 4;
+            this.lvEpisodes.UseCompatibleStateImageBehavior = false;
+            this.lvEpisodes.View = System.Windows.Forms.View.Details;
             // 
-            // columnHeader1
+            // Namn
             // 
-            this.columnHeader1.Text = "Names";
-            this.columnHeader1.Width = 285;
+            this.Namn.Text = "Namn";
+            this.Namn.Width = 188;
             // 
             // btnNyKategori
             // 
@@ -218,6 +222,7 @@
             this.lvPodcast.TabIndex = 16;
             this.lvPodcast.UseCompatibleStateImageBehavior = false;
             this.lvPodcast.View = System.Windows.Forms.View.Details;
+            this.lvPodcast.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvPodcast_ItemSelectionChanged);
             // 
             // Avsnitt
             // 
@@ -255,6 +260,15 @@
             this.cbKategori.Size = new System.Drawing.Size(136, 28);
             this.cbKategori.TabIndex = 18;
             // 
+            // Nummer
+            // 
+            this.Nummer.Text = "Nummer";
+            // 
+            // Datum
+            // 
+            this.Datum.Text = "Datum";
+            this.Datum.Width = 122;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -274,7 +288,7 @@
             this.Controls.Add(this.btnTaBortKategori);
             this.Controls.Add(this.btnSparaKategori);
             this.Controls.Add(this.btnNyKategori);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.lvEpisodes);
             this.Controls.Add(this.lbKategori);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.button2);
@@ -293,8 +307,8 @@
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox lbKategori;
-        private System.Windows.Forms.ListView listView1;
-        private System.Windows.Forms.ColumnHeader columnHeader1;
+        private System.Windows.Forms.ListView lvEpisodes;
+        private System.Windows.Forms.ColumnHeader Namn;
         private System.Windows.Forms.Button btnNyKategori;
         private System.Windows.Forms.Button btnSparaKategori;
         private System.Windows.Forms.Button btnTaBortKategori;
@@ -313,6 +327,8 @@
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ComboBox cbUppFrek;
         private System.Windows.Forms.ComboBox cbKategori;
+        private System.Windows.Forms.ColumnHeader Nummer;
+        private System.Windows.Forms.ColumnHeader Datum;
     }
 }
 

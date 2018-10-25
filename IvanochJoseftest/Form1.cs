@@ -25,16 +25,11 @@ namespace IvanochJoseftest
         private void button2_Click(object sender, EventArgs e)
         {
             button2.Text = "B=======D";
-            XMLHandler xmlHandler = new XMLHandler();
-            var nameAndEpisode = xmlHandler.GetXML(tbURL.Text);
-            for(int i = 0; i < nameAndEpisode.Count; i++)
-            {
-                string episodeNumber = i.ToString();
-                string name;
-                nameAndEpisode.TryGetValue(episodeNumber, out name);
-                lvPodcast.Items.Add(episodeNumber).SubItems.Add(name);
-            }
-            
+            var nameAndNumOfEps = XMLHandler.GetPodcast(tbURL.Text);
+
+            string episodeCount = nameAndNumOfEps[1];
+            string name = nameAndNumOfEps[0];
+            lvPodcast.Items.Add(episodeCount).SubItems.Add(name);
             saveStuff();
 
         }
@@ -52,13 +47,27 @@ namespace IvanochJoseftest
         private void saveStuff() {
             var fs = new FileStream(@"text.xml", FileMode.Create, FileAccess.Write);
             var sw = new StreamWriter(fs);
-            for(var i = 1; i < listView1.Items.Count; i++)
+            for(var i = 1; i < lvEpisodes.Items.Count; i++)
             {
-                sw.WriteLine(listView1.Items[i].Text);
+                sw.WriteLine(lvEpisodes.Items[i].Text);
                 
             }
             sw.Close();
 
-        }    
+        }
+
+        private void lvPodcast_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            var nameAndEpisode = XMLHandler.GetEpisodes(tbURL.Text);
+            for (int i = 0; i < nameAndEpisode.Count; i++)
+            {
+                string episodeNumber = i.ToString();
+                string name;
+                nameAndEpisode.TryGetValue(episodeNumber, out name);
+                lvEpisodes.Items.Add(episodeNumber).SubItems.Add(name);
+            }
+
+            saveStuff();
+        }
     }
 }
