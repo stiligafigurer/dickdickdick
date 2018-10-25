@@ -4,6 +4,7 @@ using System.Linq;
 using System.ServiceModel.Syndication;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml;
 
 namespace IvanochJoseftest.Data
@@ -23,7 +24,6 @@ namespace IvanochJoseftest.Data
                 myList.Add(PodContent[0], PodContent[1]);
             }
             return myList;
-            
         }
     }
 }
