@@ -30,12 +30,7 @@ public partial class Form1 : Form
     private void button2_Click(object sender, EventArgs e)
     {
         button2.Text = "B=======D";
-        var nameAndNumOfEps = XMLHandler.GetPodcast(tbURL.Text);
-
-        string episodeCount = nameAndNumOfEps[1];
-        string name = nameAndNumOfEps[0];
-        lvPodcast.Items.Add(episodeCount).SubItems.Add(name);
-        saveStuff();
+        
 
     }
 
@@ -103,6 +98,7 @@ public partial class Form1 : Form
 
             if (Validering.IsFilled(tbKategori.Text)) {
 
+
                 var kategorinamn = tbKategori.Text;
 
                 kategorier.Add(kategorinamn);
@@ -114,6 +110,21 @@ public partial class Form1 : Form
 
                 }
                 kategorier.Sort();
+                UpdateList();
+                tbKategori.Clear();
+        }
+
+
+
+        private void btnNyPodcast_Click(object sender, EventArgs e)
+        {
+            var nameAndNumOfEps = XMLHandler.GetPodcast(tbURL.Text);
+
+            string episodeCount = nameAndNumOfEps[1];
+            string name = nameAndNumOfEps[0];
+            lvPodcast.Items.Add(episodeCount).SubItems.Add(name);
+            saveStuff();
+
 
                 UpdateList();
 
@@ -154,6 +165,7 @@ public partial class Form1 : Form
             tbKategori.Clear();
 
             FillCB();
+
         }
 
         private void btnNyPodcast_Click(object sender, EventArgs e)
