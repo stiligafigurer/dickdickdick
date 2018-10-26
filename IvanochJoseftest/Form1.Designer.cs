@@ -59,7 +59,9 @@ namespace IvanochJoseftest
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(859, 448);
+
+            this.button2.Location = new System.Drawing.Point(624, 25);
+
             this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(102, 59);
@@ -93,10 +95,12 @@ namespace IvanochJoseftest
             this.Nummer,
             this.Namn,
             this.Datum});
-            this.lvEpisodes.Location = new System.Drawing.Point(14, 346);
+
+            this.lvEpisodes.Location = new System.Drawing.Point(18, 357);
             this.lvEpisodes.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lvEpisodes.Name = "lvEpisodes";
-            this.lvEpisodes.Size = new System.Drawing.Size(594, 305);
+            this.lvEpisodes.Size = new System.Drawing.Size(651, 298);
+
             this.lvEpisodes.TabIndex = 4;
             this.lvEpisodes.UseCompatibleStateImageBehavior = false;
             this.lvEpisodes.View = System.Windows.Forms.View.Details;
@@ -176,6 +180,7 @@ namespace IvanochJoseftest
             this.btnNyPodcast.TabIndex = 11;
             this.btnNyPodcast.Text = "Ny Podcast";
             this.btnNyPodcast.UseVisualStyleBackColor = true;
+            this.btnNyPodcast.Click += new System.EventHandler(this.btnNyPodcast_Click);
             // 
             // btnSpara
             // 
