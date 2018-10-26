@@ -11,6 +11,7 @@ using System.Xml;
 using System.ServiceModel.Syndication;
 using System.IO;
 using IvanochJoseftest.Data;
+using IvanochJoseftest.Business;
 
 namespace IvanochJoseftest
 {
@@ -82,9 +83,20 @@ public partial class Form1 : Form
             }
         }
 
+        private void FillCB()
+        {
+            cbKategori.Items.Clear();
+
+            foreach (var kategori in kategorier)
+            {
+                cbKategori.Items.Add(kategori);
+            }
+        }
+
     private void btnNyKategori_Click_1(object sender, EventArgs e)
     {
-        var kategorinamn = tbKategori.Text;
+            //Validering.TomtFalt();
+            var kategorinamn = tbKategori.Text;
 
             kategorier.Add(kategorinamn);
 
@@ -97,6 +109,8 @@ public partial class Form1 : Form
             tbKategori.Clear();
         }
 
+
+
         private void btnNyPodcast_Click(object sender, EventArgs e)
         {
             var nameAndNumOfEps = XMLHandler.GetPodcast(tbURL.Text);
@@ -106,6 +120,40 @@ public partial class Form1 : Form
             lvPodcast.Items.Add(episodeCount).SubItems.Add(name);
             saveStuff();
         
+
+            FillCB();
+
+        }
+
+        private void tbKategori_TextChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnTaBortKategori_Click(object sender, EventArgs e)
+        {
+            var kategori = lbKategori.SelectedItems.ToString();
+
+            
+
+            //foreach (string item in kategorier)
+            //{
+            //    if (item == kategori)
+            //    {
+                    lbKategori.Items.Remove(lbKategori.SelectedItem);
+                    kategorier.Remove(kategori);
+            //    }
+            //}
+
+
+            //kategorier.Sort();
+
+            //UpdateList();
+
+            tbKategori.Clear();
+
+            FillCB();
+
         }
     }
 }
