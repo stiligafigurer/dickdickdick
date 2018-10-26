@@ -36,7 +36,7 @@ public partial class Form1 : Form
 
     private void Form1_Load(object sender, EventArgs e)
     {
-        Console.WriteLine("Jävla github");
+
     }
 
     private void label1_Click(object sender, EventArgs e)
