@@ -255,6 +255,7 @@ namespace IvanochJoseftest
             // 
             // cbKategori
             // 
+            this.cbKategori.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbKategori.FormattingEnabled = true;
             this.cbKategori.Location = new System.Drawing.Point(437, 200);
             this.cbKategori.Name = "cbKategori";
