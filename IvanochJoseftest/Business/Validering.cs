@@ -9,14 +9,13 @@ namespace IvanochJoseftest.Business
 {
     class Validering
     {
+
+
         public void TomtFalt(string input)
         {
-            if (!(input == ""))
+            if ((input == ""))
             {
-                
-            } else
-            {
-                MessageBox.Show("Skriv in nåt daaaaa!!");   
+                MessageBox.Show("Skriv in nåt!!");
             }
             
         }
