@@ -17,7 +17,7 @@ namespace IvanochJoseftest.Data
             if (File.Exists(path))
             {
                 XmlReader reader = XmlReader.Create(path);
-                SyndicationFeed feed = SyndicationFeed.Load((reader));
+                SyndicationFeed feed = SyndicationFeed.Load(reader);
                 return feed;
             }
             else

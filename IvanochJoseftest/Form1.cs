@@ -58,7 +58,7 @@ public partial class Form1 : Form
 
     private void lvPodcast_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
     {
-        var nameAndEpisode = XMLHandler.GetEpisodes(tbURL.Text);
+        var nameAndEpisode = XMLHandler.GetEpisodes(lvPodcast.SelectedItems[0].SubItems[1].Text);
         for (int i = 0; i < nameAndEpisode.Count; i++)
         {
             string episodeNumber = i.ToString();
