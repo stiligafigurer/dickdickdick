@@ -142,6 +142,7 @@ namespace IvanochJoseftest
             this.btnTaBortKategori.TabIndex = 7;
             this.btnTaBortKategori.Text = "Ta bort";
             this.btnTaBortKategori.UseVisualStyleBackColor = true;
+            this.btnTaBortKategori.Click += new System.EventHandler(this.btnTaBortKategori_Click);
             // 
             // tbKategori
             // 
@@ -247,7 +248,13 @@ namespace IvanochJoseftest
             // 
             // cbUppFrek
             // 
+            this.cbUppFrek.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbUppFrek.FormattingEnabled = true;
+            this.cbUppFrek.Items.AddRange(new object[] {
+            "Var 5:e minut",
+            "Var 10:e minut",
+            "Var 15:e minut",
+            "Var 30:e minut"});
             this.cbUppFrek.Location = new System.Drawing.Point(276, 198);
             this.cbUppFrek.Name = "cbUppFrek";
             this.cbUppFrek.Size = new System.Drawing.Size(121, 24);

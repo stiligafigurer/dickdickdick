@@ -125,5 +125,30 @@ public partial class Form1 : Form
         {
             
         }
+
+        private void btnTaBortKategori_Click(object sender, EventArgs e)
+        {
+            var kategori = lbKategori.SelectedItems.ToString();
+
+            
+
+            //foreach (string item in kategorier)
+            //{
+            //    if (item == kategori)
+            //    {
+                    lbKategori.Items.Remove(lbKategori.SelectedItem);
+                    kategorier.Remove(kategori);
+            //    }
+            //}
+
+
+            //kategorier.Sort();
+
+            //UpdateList();
+
+            tbKategori.Clear();
+
+            FillCB();
+        }
     }
 }
