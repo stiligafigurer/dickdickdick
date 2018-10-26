@@ -100,25 +100,30 @@ public partial class Form1 : Form
 
     private void btnNyKategori_Click_1(object sender, EventArgs e)
     {
-            //Validering.TomtFalt();
-            var kategorinamn = tbKategori.Text;
 
-            kategorier.Add(kategorinamn);
+            if (Validering.IsFilled(tbKategori.Text)) {
 
-            foreach (string item in kategorier)
-            {
-                lbKategori.Items.Add(item);
+                var kategorinamn = tbKategori.Text;
+
+                kategorier.Add(kategorinamn);
+
+                foreach (string item in kategorier)
+                {
+                    lbKategori.Items.Add(item);
 
 
+                }
+                kategorier.Sort();
+
+                UpdateList();
+
+                tbKategori.Clear();
+
+                FillCB();
+            //} else
+            //{
+            //    MessageBox.Show("Skriv in en kategori!");
             }
-            kategorier.Sort();
-
-            UpdateList();
-
-            tbKategori.Clear();
-
-            FillCB();
-
         }
 
         private void tbKategori_TextChanged(object sender, EventArgs e)
@@ -150,5 +155,13 @@ public partial class Form1 : Form
 
             FillCB();
         }
+
+        private void btnNyPodcast_Click(object sender, EventArgs e)
+        {
+            if (Validering.IsFilled(tbURL.Text))
+            {
+                MessageBox.Show("HEj");
+            }
+            }
     }
 }

@@ -9,20 +9,18 @@ namespace IvanochJoseftest.Business
 {
     class Validering
     {
-
-
-        public void TomtFalt(string input)
+        public static bool IsFilled(string input)
         {
-            if ((input == ""))
+           if (input != "")
             {
-                MessageBox.Show("Skriv in nåt!!");
+                return true;
+            } else
+            {
+                MessageBox.Show("Fältet får inte lämnas tomt!");
+                return false;
             }
-            
         }
 
-        internal static void TomtFalt()
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }

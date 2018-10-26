@@ -176,6 +176,7 @@ namespace IvanochJoseftest
             this.btnNyPodcast.TabIndex = 11;
             this.btnNyPodcast.Text = "Ny Podcast";
             this.btnNyPodcast.UseVisualStyleBackColor = true;
+            this.btnNyPodcast.Click += new System.EventHandler(this.btnNyPodcast_Click);
             // 
             // btnSpara
             // 
