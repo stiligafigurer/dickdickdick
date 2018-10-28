@@ -9,11 +9,21 @@ using System.Xml;
 
 namespace IvanochJoseftest.Data
 {
-    class XMLPodcastHandler : IXMLReadWriteAble
+    class XMLPodcastHandler
     {
-        public string ReadFromXML(string keyword)
+        public SyndicationFeed ReadFromXML(string PoddNamn)
         {
-            throw new NotImplementedException();
+            var path = @"Database//" + PoddNamn + ".xml";
+            if (File.Exists(path))
+            {
+                XmlReader reader = XmlReader.Create(path);
+                SyndicationFeed feed = SyndicationFeed.Load(reader);
+                return feed;
+            }
+            else
+            {
+                throw new Exception();
+            }
         }
 
         public bool WriteToXML(string walla)
@@ -24,9 +34,10 @@ namespace IvanochJoseftest.Data
         public bool WriteToXML(SyndicationFeed feed)
         {
             var PoddNamn = feed.Title.Text;
-            if (!File.Exists(PoddNamn + ".xml"))
+            var path = @"Database//" + PoddNamn + ".xml";
+            if (!File.Exists(path))
             {
-                XmlWriter writer = XmlWriter.Create(PoddNamn + ".xml");
+                XmlWriter writer = XmlWriter.Create(path);
                 feed.SaveAsRss20(writer);
                 
                 return true;

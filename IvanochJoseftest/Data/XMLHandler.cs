@@ -11,15 +11,12 @@ namespace IvanochJoseftest.Data
 {
     public static class XMLHandler
     {
-        public static Dictionary<string, string> GetEpisodes(string url)
+        public static Dictionary<string, string> GetEpisodes(string name)
         {
             string Url = @"http://dellaq.libsyn.com/rss";
-            XmlReader reader = XmlReader.Create(Url);
-            SyndicationFeed feed = SyndicationFeed.Load(reader);
-            reader.Close();
-            XMLPodcastHandler handler = new XMLPodcastHandler();
-            handler.WriteToXML(feed);
             Dictionary<string, string> myList = new Dictionary<string, string>();
+            XMLPodcastHandler handler = new XMLPodcastHandler();
+            SyndicationFeed feed = handler.ReadFromXML(name);
             foreach (SyndicationItem item in feed.Items)
             {
                 string[] PodContent = item.Title.Text.Split('.');
@@ -33,7 +30,9 @@ namespace IvanochJoseftest.Data
             
             XmlReader reader = XmlReader.Create(url);
             SyndicationFeed feed = SyndicationFeed.Load(reader);
+            XMLPodcastHandler handler = new XMLPodcastHandler();
             reader.Close();
+            handler.WriteToXML(feed);
             string[] arrOfPodInfo = new string[2];
             arrOfPodInfo[0] = feed.Title.Text;
             arrOfPodInfo[1] = feed.Items.Count().ToString();

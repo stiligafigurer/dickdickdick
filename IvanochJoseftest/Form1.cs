@@ -32,6 +32,12 @@ namespace IvanochJoseftest
             button2.Text = "B=======D";
 
 
+    private void Form1_Load(object sender, EventArgs e)
+    {
+
+    }
+
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -44,7 +50,15 @@ namespace IvanochJoseftest
 
         }
 
+
+
         private void saveStuff()
+
+    private void lvPodcast_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+    {
+        var nameAndEpisode = XMLHandler.GetEpisodes(lvPodcast.SelectedItems[0].SubItems[1].Text);
+        for (int i = 0; i < nameAndEpisode.Count; i++)
+
         {
             var fs = new FileStream(@"text.xml", FileMode.Create, FileAccess.Write);
             var sw = new StreamWriter(fs);
