@@ -44,7 +44,7 @@ public partial class Form1 : Form
 
     }
 
-    private void saveStuff() {
+    /*private void saveStuff() {
         var fs = new FileStream(@"text.xml", FileMode.Create, FileAccess.Write);
         var sw = new StreamWriter(fs);
         for (var i = 1; i < lvEpisodes.Items.Count; i++)
@@ -54,7 +54,7 @@ public partial class Form1 : Form
         }
         sw.Close();
 
-    }
+    }*/
 
     private void lvPodcast_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
     {
@@ -67,7 +67,7 @@ public partial class Form1 : Form
             lvEpisodes.Items.Add(episodeNumber).SubItems.Add(name);
         }
 
-        saveStuff();
+        //saveStuff();
 
     }
         
@@ -118,7 +118,7 @@ public partial class Form1 : Form
             string episodeCount = nameAndNumOfEps[1];
             string name = nameAndNumOfEps[0];
             lvPodcast.Items.Add(episodeCount).SubItems.Add(name);
-            saveStuff();
+            //saveStuff();
         
 
             FillCB();

@@ -5,6 +5,7 @@ using System.Linq;
 using System.ServiceModel.Syndication;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml;
 
 namespace IvanochJoseftest.Data
@@ -16,8 +17,10 @@ namespace IvanochJoseftest.Data
             var path = @"Database//" + PoddNamn + ".xml";
             if (File.Exists(path))
             {
+                var xDoc = new XmlDocument();
+                xDoc.Load(path);
                 XmlReader reader = XmlReader.Create(path);
-                SyndicationFeed feed = SyndicationFeed.Load(reader);
+                SyndicationFeed feed = SyndicationFeed.Load(xDoc);
                 return feed;
             }
             else
