@@ -15,62 +15,77 @@ using IvanochJoseftest.Business;
 
 namespace IvanochJoseftest
 {
-public partial class Form1 : Form
-{
-
-    List<string> kategorier = new List<string>();
-
-    public Form1()
+    public partial class Form1 : Form
     {
-        InitializeComponent();
+
+        List<string> kategorier = new List<string>();
+
+        public Form1()
+        {
+            InitializeComponent();
             //hej
 
-    }
+        }
 
-    private void button2_Click(object sender, EventArgs e)
-    {
-        button2.Text = "B=======D";
-        
+        private void button2_Click(object sender, EventArgs e)
+        {
+            button2.Text = "B=======D";
 
-    }
 
     private void Form1_Load(object sender, EventArgs e)
     {
 
     }
 
-    private void label1_Click(object sender, EventArgs e)
-    {
-
-    }
-
-    private void saveStuff() {
-        var fs = new FileStream(@"text.xml", FileMode.Create, FileAccess.Write);
-        var sw = new StreamWriter(fs);
-        for (var i = 1; i < lvEpisodes.Items.Count; i++)
-        {
-            sw.WriteLine(lvEpisodes.Items[i].Text);
 
         }
-        sw.Close();
 
-    }
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            Console.WriteLine("Jävla github");
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+
+
+        private void saveStuff()
 
     private void lvPodcast_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
     {
         var nameAndEpisode = XMLHandler.GetEpisodes(lvPodcast.SelectedItems[0].SubItems[1].Text);
         for (int i = 0; i < nameAndEpisode.Count; i++)
+
         {
-            string episodeNumber = i.ToString();
-            string name;
-            nameAndEpisode.TryGetValue(episodeNumber, out name);
-            lvEpisodes.Items.Add(episodeNumber).SubItems.Add(name);
+            var fs = new FileStream(@"text.xml", FileMode.Create, FileAccess.Write);
+            var sw = new StreamWriter(fs);
+            for (var i = 1; i < lvEpisodes.Items.Count; i++)
+            {
+                sw.WriteLine(lvEpisodes.Items[i].Text);
+
+            }
+            sw.Close();
+
         }
 
-        saveStuff();
+        private void lvPodcast_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            var nameAndEpisode = XMLHandler.GetEpisodes(tbURL.Text);
+            for (int i = 0; i < nameAndEpisode.Count; i++)
+            {
+                string episodeNumber = i.ToString();
+                string name;
+                nameAndEpisode.TryGetValue(episodeNumber, out name);
+                lvEpisodes.Items.Add(episodeNumber).SubItems.Add(name);
+            }
 
-    }
-        
+            saveStuff();
+
+        }
+
         private void UpdateList()
         {
             lbKategori.Items.Clear();
@@ -93,25 +108,41 @@ public partial class Form1 : Form
             }
         }
 
-    private void btnNyKategori_Click_1(object sender, EventArgs e)
-    {
+        private void btnNyKategori_Click_1(object sender, EventArgs e)
+        {
 
-            if (Validering.IsFilled(tbKategori.Text)) {
+
+
+
+            if (Validering.IsFilled(tbKategori.Text))
+            {
 
 
                 var kategorinamn = tbKategori.Text;
 
                 kategorier.Add(kategorinamn);
 
-                foreach (string item in kategorier)
+                using (StreamWriter sw = File.AppendText("hej.txt"))
                 {
-                    lbKategori.Items.Add(item);
+                    //Dubbelutskrift i filen FITTTAAAAAAA
+                    //FileStream fs = new FileStream(@"C:\Users\josef\test.txt", FileMode.Append, FileAccess.Write);
 
+                    //var sw = new StreamWriter(fs);
+
+                    foreach (string item in kategorier)
+                    {
+                        lbKategori.Items.Add(item);
+                        sw.WriteLine(item);
+                    }
+                    sw.Close();
 
                 }
+                FillCB();
+
                 kategorier.Sort();
                 UpdateList();
                 tbKategori.Clear();
+            }
         }
 
 
@@ -119,11 +150,10 @@ public partial class Form1 : Form
         private void btnNyPodcast_Click(object sender, EventArgs e)
         {
             var nameAndNumOfEps = XMLHandler.GetPodcast(tbURL.Text);
-
-            string episodeCount = nameAndNumOfEps[1];
-            string name = nameAndNumOfEps[0];
-            lvPodcast.Items.Add(episodeCount).SubItems.Add(name);
-            saveStuff();
+                string episodeCount = nameAndNumOfEps[1];
+                string name = nameAndNumOfEps[0];
+                lvPodcast.Items.Add(episodeCount).SubItems.Add(name);
+                saveStuff();
 
 
                 UpdateList();
@@ -134,26 +164,23 @@ public partial class Form1 : Form
             //} else
             //{
             //    MessageBox.Show("Skriv in en kategori!");
-            }
+            // }
         }
 
-        private void tbKategori_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
+
 
         private void btnTaBortKategori_Click(object sender, EventArgs e)
         {
             var kategori = lbKategori.SelectedItems.ToString();
 
-            
+
 
             //foreach (string item in kategorier)
             //{
             //    if (item == kategori)
             //    {
-                    lbKategori.Items.Remove(lbKategori.SelectedItem);
-                    kategorier.Remove(kategori);
+            lbKategori.Items.Remove(lbKategori.SelectedItem);
+            kategorier.Remove(kategori);
             //    }
             //}
 
@@ -168,12 +195,8 @@ public partial class Form1 : Form
 
         }
 
-        private void btnNyPodcast_Click(object sender, EventArgs e)
-        {
-            if (Validering.IsFilled(tbURL.Text))
-            {
-                MessageBox.Show("HEj");
-            }
-            }
+
+
     }
 }
+
