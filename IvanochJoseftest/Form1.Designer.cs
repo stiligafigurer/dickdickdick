@@ -49,8 +49,8 @@ namespace IvanochJoseftest
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.lvPodcast = new System.Windows.Forms.ListView();
-            this.Avsnitt = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.Avsnitt = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cbUppFrek = new System.Windows.Forms.ComboBox();
@@ -94,10 +94,10 @@ namespace IvanochJoseftest
             this.Nummer,
             this.Namn,
             this.Datum});
-            this.lvEpisodes.Location = new System.Drawing.Point(20, 446);
+            this.lvEpisodes.Location = new System.Drawing.Point(12, 323);
             this.lvEpisodes.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lvEpisodes.Name = "lvEpisodes";
-            this.lvEpisodes.Size = new System.Drawing.Size(732, 372);
+            this.lvEpisodes.Size = new System.Drawing.Size(685, 332);
             this.lvEpisodes.TabIndex = 4;
             this.lvEpisodes.UseCompatibleStateImageBehavior = false;
             this.lvEpisodes.View = System.Windows.Forms.View.Details;
@@ -237,14 +237,13 @@ namespace IvanochJoseftest
             this.lvPodcast.View = System.Windows.Forms.View.Details;
             this.lvPodcast.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvPodcast_ItemSelectionChanged);
             // 
+            // columnHeader2
+            // 
+            this.columnHeader2.Text = "Namn";
+            // 
             // Avsnitt
             // 
             this.Avsnitt.Text = "Avsnitt";
-            // 
-            // columnHeader2
-            // 
-            this.columnHeader2.DisplayIndex = 1;
-            this.columnHeader2.Text = "Namn";
             // 
             // columnHeader3
             // 

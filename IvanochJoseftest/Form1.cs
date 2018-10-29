@@ -59,16 +59,20 @@ namespace IvanochJoseftest
         }*/
 
         private void lvPodcast_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
-
         {
-            var nameAndEpisode = XMLHandler.GetEpisodes(lvPodcast.SelectedItems[0].SubItems[1].Text);
-            for (int i = 0; i < nameAndEpisode.Count; i++)
+            if (lvPodcast.SelectedItems.Count > 0)
             {
-                string episodeNumber = i.ToString();
-                string name;
-                nameAndEpisode.TryGetValue(episodeNumber, out name);
-                lvEpisodes.Items.Add(episodeNumber).SubItems.Add(name);
+                var nameAndEpisode = XMLHandler.GetEpisodes(lvPodcast.SelectedItems[0].ToString());
+                for (int i = 0; i < nameAndEpisode.Count; i++)
+                {
+                    string episodeNumber = i.ToString();
+                    string name;
+                    nameAndEpisode.TryGetValue(episodeNumber, out name);
+                    lvEpisodes.Items.Add(episodeNumber).SubItems.Add(name);
+                }
+
             }
+            
 
             //saveStuff();
 
@@ -100,32 +104,22 @@ namespace IvanochJoseftest
         {
             if (Validering.IsFilled(tbKategori.Text))
             {
-
-
-                var kategorinamn = tbKategori.Text;
-
-                kategorier.Add(kategorinamn);
-
-                using (StreamWriter sw = File.AppendText("hej.txt"))
+                XMLCategoryHandler handler = new XMLCategoryHandler();
+                if(handler.WriteToXML(tbKategori.Text))
                 {
-                    //Dubbelutskrift i filen FITTTAAAAAAA
-                    //FileStream fs = new FileStream(@"C:\Users\josef\test.txt", FileMode.Append, FileAccess.Write);
-
-                    //var sw = new StreamWriter(fs);
-
+                    lbKategori.Items.Clear();
+                    kategorier.Add(tbKategori.Text);
                     foreach (string item in kategorier)
                     {
                         lbKategori.Items.Add(item);
-                        sw.WriteLine(item);
                     }
-                    sw.Close();
 
                 }
                 FillCB();
-                //UpdateList();
-                kategorier.Sort();
-                
+                //updatelist();
+                lbKategori.
                 tbKategori.Clear();
+            
             }
         }
 

@@ -14,20 +14,47 @@ namespace IvanochJoseftest.Data
             if (File.Exists("Kategorier.xml"))
             {
                 StreamReader reader = new StreamReader("Kategorier.xml");
-                var hej = reader.ReadToEnd();
+                var hej = reader.ReadToEnd().Split('\n');
+                reader.Close();
                 return "hej";
 
             }
             else
             {
                 StreamWriter Writer = new StreamWriter("Kategorier.xml");
+                Writer.Close();
                 return "hej";
             }
         }
 
         public bool WriteToXML(string text)
         {
-            throw new NotImplementedException();
+            if (File.Exists("Kategorier.xml"))
+            {
+                StreamReader reader = new StreamReader("Kategorier.xml");
+                var lineSplit = new string[] {"\r\n"};
+                var ArrOfCategories = reader.ReadToEnd().Split(lineSplit, StringSplitOptions.None);
+                reader.Close();
+                StreamWriter writer = File.AppendText("Kategorier.xml");
+                bool exists = false;
+                
+                foreach(string item in ArrOfCategories)
+                {
+                    if(item == text)
+                    {
+                        exists = true;
+                    }
+                }
+                if (!exists)
+                {
+                    writer.WriteLine(text);
+                    writer.Close();
+                    return true;
+                }
+                writer.Close();
+            }
+            return false;
+            
         }
     }
 }
