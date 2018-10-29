@@ -52,13 +52,14 @@ namespace IvanochJoseftest
             for (var i = 1; i < lvEpisodes.Items.Count; i++)
             {
                 sw.WriteLine(lvEpisodes.Items[i].Text);
+                
 
-            }
+            };
             sw.Close();
-
         }*/
 
         private void lvPodcast_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+
         {
             var nameAndEpisode = XMLHandler.GetEpisodes(lvPodcast.SelectedItems[0].SubItems[1].Text);
             for (int i = 0; i < nameAndEpisode.Count; i++)
@@ -134,8 +135,8 @@ namespace IvanochJoseftest
         {
             var nameAndNumOfEps = XMLHandler.GetPodcast(tbURL.Text);
 
-            string episodeCount = nameAndNumOfEps[1];
-            string name = nameAndNumOfEps[0];
+            string episodeCount = nameAndNumOfEps[0];
+            string name = nameAndNumOfEps[1];
             lvPodcast.Items.Add(episodeCount).SubItems.Add(name);
             //saveStuff();
 
