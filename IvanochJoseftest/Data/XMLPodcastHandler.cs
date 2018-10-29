@@ -17,10 +17,8 @@ namespace IvanochJoseftest.Data
             var path = @"Database//" + PoddNamn + ".xml";
             if (File.Exists(path))
             {
-                var xDoc = new XmlDocument();
-                xDoc.Load(path);
                 XmlReader reader = XmlReader.Create(path);
-                SyndicationFeed feed = SyndicationFeed.Load(xDoc);
+                SyndicationFeed feed = SyndicationFeed.Load(reader);
                 return feed;
             }
             else
@@ -38,17 +36,10 @@ namespace IvanochJoseftest.Data
         {
             var PoddNamn = feed.Title.Text;
             var path = @"Database//" + PoddNamn + ".xml";
-            if (!File.Exists(path))
-            {
-                XmlWriter writer = XmlWriter.Create(path);
-                feed.SaveAsRss20(writer);
-                
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            XmlWriter writer = XmlWriter.Create(path);
+            feed.SaveAsRss20(writer);
+            writer.Close();
+            return true;
         }
     }
 }

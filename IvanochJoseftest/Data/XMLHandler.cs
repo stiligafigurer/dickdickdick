@@ -13,6 +13,9 @@ namespace IvanochJoseftest.Data
     {
         public static Dictionary<string, string> GetEpisodes(string name)
         {
+            int length = name.Length - 16;
+            name = name.Substring(15, length);
+            //Substring vill veta vart den ska börja samt hur många tecken minus sista måsen. 
             string Url = @"http://dellaq.libsyn.com/rss";
             Dictionary<string, string> myList = new Dictionary<string, string>();
             XMLPodcastHandler handler = new XMLPodcastHandler();
