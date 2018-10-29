@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace IvanochJoseftest.Data
 {
-    class XMLCategoryHandler : IXMLReadWriteAble
+    class XMLCategoryHandler
     {
-        public string ReadFromXML(string keyword)
+        public string ReadCategoryFromXML(string keyword)
         {
             if (File.Exists("Kategorier.xml"))
             {
@@ -21,6 +21,7 @@ namespace IvanochJoseftest.Data
             }
             else
             {
+                File.Create("Kategorier.xml");
                 StreamWriter Writer = new StreamWriter("Kategorier.xml");
                 Writer.Close();
                 return "hej";
@@ -52,9 +53,24 @@ namespace IvanochJoseftest.Data
                     return true;
                 }
                 writer.Close();
+                return false;
             }
+            File.Create("Kategorier.xml");
             return false;
             
+        }
+
+        public string[] ReadAllCategoriesFromXML()
+        {
+            if(File.Exists("Kategorier.xml"))
+            {
+                StreamReader reader = new StreamReader("Kategorier.xml");
+                var SplitOn = new string[] { "\r\n" };
+                var ArrOfCategories = reader.ReadToEnd().ToString().Split(SplitOn, StringSplitOptions.None);
+                reader.Close();
+                return ArrOfCategories;
+            }
+            throw new Exception();
         }
     }
 }

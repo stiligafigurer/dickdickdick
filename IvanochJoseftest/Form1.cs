@@ -23,14 +23,11 @@ namespace IvanochJoseftest
         public Form1()
         {
             InitializeComponent();
-            //hej
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             button2.Text = "B=======D";
-
 
         }
 
@@ -46,23 +43,12 @@ namespace IvanochJoseftest
 
         }
 
-        /*private void saveStuff() {
-            var fs = new FileStream(@"text.xml", FileMode.Create, FileAccess.Write);
-            var sw = new StreamWriter(fs);
-            for (var i = 1; i < lvEpisodes.Items.Count; i++)
-            {
-                sw.WriteLine(lvEpisodes.Items[i].Text);
-                
-
-            };
-            sw.Close();
-        }*/
-
         private void lvPodcast_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             if (lvPodcast.SelectedItems.Count > 0)
             {
                 var nameAndEpisode = XMLHandler.GetEpisodes(lvPodcast.SelectedItems[0].ToString());
+                lvEpisodes.Items.Clear();
                 for (int i = 0; i < nameAndEpisode.Count; i++)
                 {
                     string episodeNumber = i.ToString();
@@ -72,22 +58,11 @@ namespace IvanochJoseftest
                 }
 
             }
-            
-
-            //saveStuff();
-
         }
 
         private void UpdateList()
         {
-           // lbKategori.Items.Clear();
-
-            foreach (var kategori in kategorier)
-            {
-                lbKategori.Items.Add(
-                kategori
-                );
-            }
+           
         }
 
         private void FillCB()
@@ -107,17 +82,10 @@ namespace IvanochJoseftest
                 XMLCategoryHandler handler = new XMLCategoryHandler();
                 if(handler.WriteToXML(tbKategori.Text))
                 {
-                    lbKategori.Items.Clear();
-                    kategorier.Add(tbKategori.Text);
-                    foreach (string item in kategorier)
-                    {
-                        lbKategori.Items.Add(item);
-                    }
-
+                   lbKategori.Items.Add(tbKategori.Text);
                 }
                 FillCB();
-                //updatelist();
-                lbKategori.
+                lbKategori.Sorted = true;
                 tbKategori.Clear();
             
             }
@@ -171,20 +139,15 @@ namespace IvanochJoseftest
         }
         public void ListBoxOnLoad()
         {
-            string path = @"hej.txt";
-            using (StreamReader sr = new StreamReader(path))
+            XMLCategoryHandler handler = new XMLCategoryHandler();
+            var ArrOfCategories = handler.ReadAllCategoriesFromXML();
+            foreach(string item in ArrOfCategories)
             {
-                while (!sr.EndOfStream)
-                {
-                    lbKategori.Items.Add(Convert.ToString(sr.ReadLine()));
-                    FillCB();
-                    UpdateList();
-                }
-
+                lbKategori.Items.Add(item);
             }
-
-
+            lbKategori.Sorted = true;
         }
+
         public void ComboBoxOnLoad()
         {
             string[] lineOfContents = File.ReadAllLines("hej.txt");
