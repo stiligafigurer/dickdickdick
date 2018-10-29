@@ -15,65 +15,68 @@ using IvanochJoseftest.Business;
 
 namespace IvanochJoseftest
 {
-public partial class Form1 : Form
-{
-
-    List<string> kategorier = new List<string>();
-
-    public Form1()
+    public partial class Form1 : Form
     {
-        InitializeComponent();
+
+        List<string> kategorier = new List<string>();
+
+        public Form1()
+        {
+            InitializeComponent();
             //hej
 
-    }
-
-    private void button2_Click(object sender, EventArgs e)
-    {
-        button2.Text = "B=======D";
-        
-
-    }
-
-    private void Form1_Load(object sender, EventArgs e)
-    {
-
-    }
-
-    private void label1_Click(object sender, EventArgs e)
-    {
-
-    }
-
-    /*private void saveStuff() {
-        var fs = new FileStream(@"text.xml", FileMode.Create, FileAccess.Write);
-        var sw = new StreamWriter(fs);
-        for (var i = 1; i < lvEpisodes.Items.Count; i++)
-        {
-            sw.WriteLine(lvEpisodes.Items[i].Text);
-
-        }
-        sw.Close();
-
-    }*/
-
-    private void lvPodcast_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
-    {
-        var nameAndEpisode = XMLHandler.GetEpisodes(lvPodcast.SelectedItems[0].ToString());
-        for (int i = 0; i < nameAndEpisode.Count; i++)
-        {
-            string episodeNumber = i.ToString();
-            string name;
-            nameAndEpisode.TryGetValue(episodeNumber, out name);
-            lvEpisodes.Items.Add(episodeNumber).SubItems.Add(name);
         }
 
-        //saveStuff();
+        private void button2_Click(object sender, EventArgs e)
+        {
+            button2.Text = "B=======D";
 
-    }
-        
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            ListBoxOnLoad();
+            ComboBoxOnLoad();
+            
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /*private void saveStuff() {
+            var fs = new FileStream(@"text.xml", FileMode.Create, FileAccess.Write);
+            var sw = new StreamWriter(fs);
+            for (var i = 1; i < lvEpisodes.Items.Count; i++)
+            {
+                sw.WriteLine(lvEpisodes.Items[i].Text);
+                
+
+            };
+            sw.Close();
+        }*/
+
+        private void lvPodcast_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+
+        {
+            var nameAndEpisode = XMLHandler.GetEpisodes(lvPodcast.SelectedItems[0].SubItems[1].Text);
+            for (int i = 0; i < nameAndEpisode.Count; i++)
+            {
+                string episodeNumber = i.ToString();
+                string name;
+                nameAndEpisode.TryGetValue(episodeNumber, out name);
+                lvEpisodes.Items.Add(episodeNumber).SubItems.Add(name);
+            }
+
+            //saveStuff();
+
+        }
+
         private void UpdateList()
         {
-            lbKategori.Items.Clear();
+           // lbKategori.Items.Clear();
 
             foreach (var kategori in kategorier)
             {
@@ -85,7 +88,7 @@ public partial class Form1 : Form
 
         private void FillCB()
         {
-            cbKategori.Items.Clear();
+            //cbKategori.Items.Clear();
 
             foreach (var kategori in kategorier)
             {
@@ -93,20 +96,37 @@ public partial class Form1 : Form
             }
         }
 
-    private void btnNyKategori_Click_1(object sender, EventArgs e)
-    {
-            //Validering.TomtFalt();
-            var kategorinamn = tbKategori.Text;
-
-            kategorier.Add(kategorinamn);
-
-            foreach (string item in kategorier)
+        private void btnNyKategori_Click_1(object sender, EventArgs e)
+        {
+            if (Validering.IsFilled(tbKategori.Text))
             {
-                lbKategori.Items.Add(item);
+
+
+                var kategorinamn = tbKategori.Text;
+
+                kategorier.Add(kategorinamn);
+
+                using (StreamWriter sw = File.AppendText("hej.txt"))
+                {
+                    //Dubbelutskrift i filen FITTTAAAAAAA
+                    //FileStream fs = new FileStream(@"C:\Users\josef\test.txt", FileMode.Append, FileAccess.Write);
+
+                    //var sw = new StreamWriter(fs);
+
+                    foreach (string item in kategorier)
+                    {
+                        lbKategori.Items.Add(item);
+                        sw.WriteLine(item);
+                    }
+                    sw.Close();
+
+                }
+                FillCB();
+                //UpdateList();
+                kategorier.Sort();
+                
+                tbKategori.Clear();
             }
-            kategorier.Sort();
-            UpdateList();
-            tbKategori.Clear();
         }
 
 
@@ -119,7 +139,7 @@ public partial class Form1 : Form
             string name = nameAndNumOfEps[1];
             lvPodcast.Items.Add(episodeCount).SubItems.Add(name);
             //saveStuff();
-        
+
 
             FillCB();
 
@@ -127,21 +147,21 @@ public partial class Form1 : Form
 
         private void tbKategori_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btnTaBortKategori_Click(object sender, EventArgs e)
         {
             var kategori = lbKategori.SelectedItems.ToString();
 
-            
+
 
             //foreach (string item in kategorier)
             //{
             //    if (item == kategori)
             //    {
-                    lbKategori.Items.Remove(lbKategori.SelectedItem);
-                    kategorier.Remove(kategori);
+            lbKategori.Items.Remove(lbKategori.SelectedItem);
+            kategorier.Remove(kategori);
             //    }
             //}
 
@@ -154,6 +174,31 @@ public partial class Form1 : Form
 
             FillCB();
 
+        }
+        public void ListBoxOnLoad()
+        {
+            string path = @"hej.txt";
+            using (StreamReader sr = new StreamReader(path))
+            {
+                while (!sr.EndOfStream)
+                {
+                    lbKategori.Items.Add(Convert.ToString(sr.ReadLine()));
+                    FillCB();
+                    UpdateList();
+                }
+
+            }
+
+
+        }
+        public void ComboBoxOnLoad()
+        {
+            string[] lineOfContents = File.ReadAllLines("hej.txt");
+            foreach (var line in lineOfContents)
+            {
+                string[] tokens = line.Split(',');
+                cbKategori.Items.Add(tokens[0]);
+            }
         }
     }
 }
