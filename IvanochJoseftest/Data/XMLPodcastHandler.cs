@@ -28,11 +28,6 @@ namespace IvanochJoseftest.Data
             }
         }
 
-        public static bool WriteToXML(string walla)
-        {
-            throw new NotImplementedException();
-        }
-
         public static bool WriteToXML(SyndicationFeed feed)
         {
             var PoddNamn = feed.Title.Text;

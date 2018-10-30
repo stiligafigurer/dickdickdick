@@ -52,8 +52,7 @@ namespace IvanochJoseftest
                 for (int i = 0; i < nameAndEpisode.Count; i++)
                 {
                     string episodeNumber = i.ToString();
-                    string name;
-                    nameAndEpisode.TryGetValue(episodeNumber, out name);
+                    nameAndEpisode.TryGetValue(episodeNumber, out string name);
                     lvEpisodes.Items.Add(episodeNumber).SubItems.Add(name);
                 }
 
@@ -123,6 +122,7 @@ namespace IvanochJoseftest
         //}
         public void ListBoxOnLoad()
         {
+            lbKategori.Items.Clear();
             var ArrOfCategories = XMLCategoryHandler.ReadAllCategoriesFromXML();
             foreach(string item in ArrOfCategories)
             {
@@ -144,11 +144,32 @@ namespace IvanochJoseftest
 
         private void btnTaBortKategori_Click_1(object sender, EventArgs e)
         {
-            var kategori = lbKategori.SelectedItems.ToString();
+            var kategori = lbKategori.SelectedItem.ToString();
             tbKategori.Clear();
-            XMLCategoryHandler.RemoveCategoryFromXML(kategori);
-            FillCB();
-            ListBoxOnLoad();
+            if (XMLCategoryHandler.RemoveCategoryFromXML(kategori))
+            {
+                FillCB();
+                ListBoxOnLoad();
+            }
+        }
+
+        private void lvEpisodes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lvEpisodes.SelectedItems.Count > 0)
+            {
+                var nameAndEpisode = XMLHandler.GetEpisodes(lvPodcast.SelectedItems[0].ToString());
+                lvEpisodes.Items.Clear();
+                for (int i = 0; i < nameAndEpisode.Count; i++)
+                {
+                    string episodeNumber = i.ToString();
+                    string name;
+                    nameAndEpisode.TryGetValue(episodeNumber, out name);
+                    lvEpisodes.Items.Add(episodeNumber).SubItems.Add(name);
+                }
+
+            }
+            //Denna blir lurig. Måste hämta namnet på podden samt avsnittsnamnet och få ut beskrivningen.
+            //NEVERMIND! Vi sparar en variabel med namnet på podden i Form1 och använder den för info. 
         }
     }
 }

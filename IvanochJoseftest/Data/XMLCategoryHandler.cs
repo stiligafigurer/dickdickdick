@@ -76,20 +76,34 @@ namespace IvanochJoseftest.Data
         public static bool RemoveCategoryFromXML(string name)
         {
             List<string> ListOfCategories = ReadAllCategoriesFromXML().ToList();
+            List<string> LinesToKeep = new List<string>();
             bool HasLine = false;
-            int LineToDelete = 0;
+            List<string> LinesToDelete = new List<string>();
             for(int i = 0; i < ListOfCategories.Count; i++)
             {
                 if (ListOfCategories.ElementAt(i) == name)
                 {
                     HasLine = true;
-                    LineToDelete = i;
+                    LinesToDelete.Add(name);
+                }
+                else if(ListOfCategories.ElementAt(i).Length < 1)
+                {
+                    ListOfCategories.RemoveAt(i);
                 }
             }
             if(HasLine)
             {
-                ListOfCategories.RemoveAt(LineToDelete);
-                File.WriteAllLines(("Kategorier.xml"), ListOfCategories.ToArray());
+                foreach (var line in LinesToDelete)
+                {
+                    foreach (var item in ListOfCategories)
+                    {
+                        if(item != line)
+                        {
+                            LinesToKeep.Add(item);
+                        }
+                    }
+                }
+                File.WriteAllLines(("Kategorier.xml"), LinesToKeep.ToArray());
                 return true;
             }
             return false;
