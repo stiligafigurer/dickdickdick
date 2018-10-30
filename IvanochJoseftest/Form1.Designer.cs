@@ -146,6 +146,7 @@ namespace IvanochJoseftest
             this.btnTaBortKategori.TabIndex = 7;
             this.btnTaBortKategori.Text = "Ta bort";
             this.btnTaBortKategori.UseVisualStyleBackColor = true;
+            this.btnTaBortKategori.Click += new System.EventHandler(this.btnTaBortKategori_Click_1);
             // 
             // tbKategori
             // 

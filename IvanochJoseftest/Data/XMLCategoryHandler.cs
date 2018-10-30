@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace IvanochJoseftest.Data
 {
-    class XMLCategoryHandler
+    public static class XMLCategoryHandler
     {
-        public string ReadCategoryFromXML(string keyword)
+        public static string ReadCategoryFromXML(string keyword)
         {
             if (File.Exists("Kategorier.xml"))
             {
@@ -28,7 +28,7 @@ namespace IvanochJoseftest.Data
             }
         }
 
-        public bool WriteToXML(string text)
+        public static bool WriteToXML(string text)
         {
             if (File.Exists("Kategorier.xml"))
             {
@@ -60,7 +60,7 @@ namespace IvanochJoseftest.Data
             
         }
 
-        public string[] ReadAllCategoriesFromXML()
+        public static string[] ReadAllCategoriesFromXML()
         {
             if(File.Exists("Kategorier.xml"))
             {
@@ -71,6 +71,28 @@ namespace IvanochJoseftest.Data
                 return ArrOfCategories;
             }
             throw new Exception();
+        }
+
+        public static bool RemoveCategoryFromXML(string name)
+        {
+            List<string> ListOfCategories = ReadAllCategoriesFromXML().ToList();
+            bool HasLine = false;
+            int LineToDelete = 0;
+            for(int i = 0; i < ListOfCategories.Count; i++)
+            {
+                if (ListOfCategories.ElementAt(i) == name)
+                {
+                    HasLine = true;
+                    LineToDelete = i;
+                }
+            }
+            if(HasLine)
+            {
+                ListOfCategories.RemoveAt(LineToDelete);
+                File.WriteAllLines(("Kategorier.xml"), ListOfCategories.ToArray());
+                return true;
+            }
+            return false;
         }
     }
 }
