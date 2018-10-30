@@ -67,11 +67,12 @@ namespace IvanochJoseftest
 
         private void FillCB()
         {
-            //cbKategori.Items.Clear();
+            cbKategori.Items.Clear();
+            var listOfCategories = XMLCategoryHandler.ReadAllCategoriesFromXML();
 
-            foreach (var kategori in kategorier)
+            foreach (var item in listOfCategories)
             {
-                cbKategori.Items.Add(kategori);
+                cbKategori.Items.Add(item);
             }
         }
 
@@ -79,8 +80,7 @@ namespace IvanochJoseftest
         {
             if (Validering.IsFilled(tbKategori.Text))
             {
-                XMLCategoryHandler handler = new XMLCategoryHandler();
-                if(handler.WriteToXML(tbKategori.Text))
+                if(XMLCategoryHandler.WriteToXML(tbKategori.Text))
                 {
                    lbKategori.Items.Add(tbKategori.Text);
                 }
@@ -112,35 +112,18 @@ namespace IvanochJoseftest
 
         }
 
-        private void btnTaBortKategori_Click(object sender, EventArgs e)
-        {
-            var kategori = lbKategori.SelectedItems.ToString();
+        //private void btnTaBortKategori_Click(object sender, EventArgs e)
+        //{
+        //    var kategori = lbKategori.SelectedItems.ToString();
+        //    tbKategori.Clear();
+        //    XMLCategoryHandler.RemoveCategoryFromXML(kategori);
+        //    FillCB();
+        //    ListBoxOnLoad();
 
-
-
-            //foreach (string item in kategorier)
-            //{
-            //    if (item == kategori)
-            //    {
-            lbKategori.Items.Remove(lbKategori.SelectedItem);
-            kategorier.Remove(kategori);
-            //    }
-            //}
-
-
-            //kategorier.Sort();
-
-            //UpdateList();
-
-            tbKategori.Clear();
-
-            FillCB();
-
-        }
+        //}
         public void ListBoxOnLoad()
         {
-            XMLCategoryHandler handler = new XMLCategoryHandler();
-            var ArrOfCategories = handler.ReadAllCategoriesFromXML();
+            var ArrOfCategories = XMLCategoryHandler.ReadAllCategoriesFromXML();
             foreach(string item in ArrOfCategories)
             {
                 lbKategori.Items.Add(item);
@@ -150,12 +133,22 @@ namespace IvanochJoseftest
 
         public void ComboBoxOnLoad()
         {
-            string[] lineOfContents = File.ReadAllLines("hej.txt");
+            string[] lineOfContents = File.ReadAllLines("Kategorier.xml");
             foreach (var line in lineOfContents)
             {
-                string[] tokens = line.Split(',');
-                cbKategori.Items.Add(tokens[0]);
+                var SplitOn = new string[] { "\r\n" };
+                var ArrOfTokens = line.Split(SplitOn, StringSplitOptions.None);
+                cbKategori.Items.Add(ArrOfTokens[0]);
             }
+        }
+
+        private void btnTaBortKategori_Click_1(object sender, EventArgs e)
+        {
+            var kategori = lbKategori.SelectedItems.ToString();
+            tbKategori.Clear();
+            XMLCategoryHandler.RemoveCategoryFromXML(kategori);
+            FillCB();
+            ListBoxOnLoad();
         }
     }
 }

@@ -18,8 +18,7 @@ namespace IvanochJoseftest.Data
             //Substring vill veta vart den ska börja samt hur många tecken minus sista måsen. 
             string Url = @"http://dellaq.libsyn.com/rss";
             Dictionary<string, string> myList = new Dictionary<string, string>();
-            XMLPodcastHandler handler = new XMLPodcastHandler();
-            SyndicationFeed feed = handler.ReadFromXML(name);
+            SyndicationFeed feed = XMLPodcastHandler.ReadFromXML(name);
             foreach (SyndicationItem item in feed.Items)
             {
                 string[] PodContent = item.Title.Text.Split('.');
@@ -33,9 +32,8 @@ namespace IvanochJoseftest.Data
             
             XmlReader reader = XmlReader.Create(url);
             SyndicationFeed feed = SyndicationFeed.Load(reader);
-            XMLPodcastHandler handler = new XMLPodcastHandler();
             reader.Close();
-            handler.WriteToXML(feed);
+            XMLPodcastHandler.WriteToXML(feed);
             string[] arrOfPodInfo = new string[2];
             arrOfPodInfo[0] = feed.Title.Text;
             arrOfPodInfo[1] = feed.Items.Count().ToString();

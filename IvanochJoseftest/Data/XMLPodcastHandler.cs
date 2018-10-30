@@ -10,9 +10,9 @@ using System.Xml;
 
 namespace IvanochJoseftest.Data
 {
-    class XMLPodcastHandler
+    public static class XMLPodcastHandler
     {
-        public SyndicationFeed ReadFromXML(string PoddNamn)
+        public static SyndicationFeed ReadFromXML(string PoddNamn)
         {
             var path = @"Database//" + PoddNamn + ".xml";
             if (File.Exists(path))
@@ -28,12 +28,12 @@ namespace IvanochJoseftest.Data
             }
         }
 
-        public bool WriteToXML(string walla)
+        public static bool WriteToXML(string walla)
         {
             throw new NotImplementedException();
         }
 
-        public bool WriteToXML(SyndicationFeed feed)
+        public static bool WriteToXML(SyndicationFeed feed)
         {
             var PoddNamn = feed.Title.Text;
             var path = @"Database//" + PoddNamn + ".xml";
