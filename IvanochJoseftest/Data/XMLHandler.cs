@@ -15,8 +15,6 @@ namespace IvanochJoseftest.Data
         {
             int length = name.Length - 16;
             name = name.Substring(15, length);
-            //Substring vill veta vart den ska börja samt hur många tecken minus sista måsen. 
-            string Url = @"http://dellaq.libsyn.com/rss";
             Dictionary<string, string> myList = new Dictionary<string, string>();
             SyndicationFeed feed = XMLPodcastHandler.ReadFromXML(name);
             foreach (SyndicationItem item in feed.Items)
