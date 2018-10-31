@@ -38,7 +38,6 @@ namespace IvanochJoseftest
         {
             ListBoxOnLoad();
             ComboBoxOnLoad();
-            
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -117,7 +116,7 @@ namespace IvanochJoseftest
                 }
                 FillCB();
                 //updatelist();
-                lbKategori.
+                lbKategori.Sorted = true;
                 tbKategori.Clear();
             
             }
@@ -127,6 +126,8 @@ namespace IvanochJoseftest
 
         private void btnNyPodcast_Click(object sender, EventArgs e)
         {
+            // && Validering.TrueURL(tbURL.Text))
+            if (Validering.IsFilled(tbURL.Text)) {
             var nameAndNumOfEps = XMLHandler.GetPodcast(tbURL.Text);
 
             string episodeCount = nameAndNumOfEps[0];
@@ -136,6 +137,8 @@ namespace IvanochJoseftest
 
 
             FillCB();
+
+        }
 
         }
 
@@ -171,28 +174,28 @@ namespace IvanochJoseftest
         }
         public void ListBoxOnLoad()
         {
-            string path = @"hej.txt";
-            using (StreamReader sr = new StreamReader(path))
-            {
-                while (!sr.EndOfStream)
-                {
-                    lbKategori.Items.Add(Convert.ToString(sr.ReadLine()));
-                    FillCB();
-                    UpdateList();
-                }
+            //string path = @"hej.txt";
+            //using (StreamReader sr = new StreamReader(path))
+            //{
+            //    while (!sr.EndOfStream)
+            //    {
+            //        lbKategori.Items.Add(Convert.ToString(sr.ReadLine()));
+            //        FillCB();
+            //        UpdateList();
+            //    }
 
-            }
+            //}
 
 
         }
         public void ComboBoxOnLoad()
         {
-            string[] lineOfContents = File.ReadAllLines("hej.txt");
-            foreach (var line in lineOfContents)
-            {
-                string[] tokens = line.Split(',');
-                cbKategori.Items.Add(tokens[0]);
-            }
+            //string[] lineOfContents = File.ReadAllLines("hej.txt");
+            //foreach (var line in lineOfContents)
+            //{
+            //    string[] tokens = line.Split(',');
+            //    cbKategori.Items.Add(tokens[0]);
+            //}
         }
     }
 }

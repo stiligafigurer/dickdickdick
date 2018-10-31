@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.ServiceModel.Syndication;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 
 namespace IvanochJoseftest.Business
 {
@@ -21,6 +23,20 @@ namespace IvanochJoseftest.Business
             }
         }
 
+        public static bool TrueURL(string url)
+        {
+            try
+            {
+                XmlReader reader = XmlReader.Create(url);
+                SyndicationFeed feed = SyndicationFeed.Load(reader);
+                reader.Close();
+                return true;
+            } catch
+            {
+                MessageBox.Show("Skriv in en korrekt URL till en RSS-feed.");
+                return false;
+            }
+        }
 
     }
 }
