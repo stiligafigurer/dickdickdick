@@ -29,6 +29,7 @@ namespace IvanochJoseftest.Data
         public static string[] GetPodcast(string url)
         {
             
+                
             XmlReader reader = XmlReader.Create(url);
             SyndicationFeed feed = SyndicationFeed.Load(reader);
             reader.Close();
@@ -36,8 +37,9 @@ namespace IvanochJoseftest.Data
             string[] arrOfPodInfo = new string[2];
             arrOfPodInfo[0] = feed.Title.Text;
             arrOfPodInfo[1] = feed.Items.Count().ToString();
-            
             return arrOfPodInfo;
+            
+
         }
 
         public static string GetEpisodeInfo(string PodName, string EpisodeName)

@@ -36,7 +36,6 @@ namespace IvanochJoseftest
         {
             ListBoxOnLoad();
             ComboBoxOnLoad();
-            
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -87,6 +86,7 @@ namespace IvanochJoseftest
                    lbKategori.Items.Add(tbKategori.Text);
                 }
                 FillCB();
+
                 lbKategori.Sorted = true;
                 tbKategori.Clear();
             
@@ -97,6 +97,8 @@ namespace IvanochJoseftest
 
         private void btnNyPodcast_Click(object sender, EventArgs e)
         {
+            // && Validering.TrueURL(tbURL.Text))
+            if (Validering.IsFilled(tbURL.Text)) {
             var nameAndNumOfEps = XMLHandler.GetPodcast(tbURL.Text);
 
             string episodeCount = nameAndNumOfEps[0];
@@ -106,6 +108,8 @@ namespace IvanochJoseftest
 
 
             FillCB();
+
+        }
 
         }
 
@@ -125,6 +129,7 @@ namespace IvanochJoseftest
         //}
         public void ListBoxOnLoad()
         {
+
             lbKategori.Items.Clear();
             var ArrOfCategories = XMLCategoryHandler.ReadAllCategoriesFromXML();
             foreach(string item in ArrOfCategories)
@@ -136,6 +141,7 @@ namespace IvanochJoseftest
 
         public void ComboBoxOnLoad()
         {
+
             string[] lineOfContents = File.ReadAllLines("Kategorier.xml");
             foreach (var line in lineOfContents)
             {
