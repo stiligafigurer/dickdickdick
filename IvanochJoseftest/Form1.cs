@@ -19,6 +19,7 @@ namespace IvanochJoseftest
     {
 
         List<string> kategorier = new List<string>();
+        string SelectedPodcast = "";
 
         public Form1()
         {
@@ -47,7 +48,9 @@ namespace IvanochJoseftest
         {
             if (lvPodcast.SelectedItems.Count > 0)
             {
-                var nameAndEpisode = XMLHandler.GetEpisodes(lvPodcast.SelectedItems[0].ToString());
+                string podcastName = lvPodcast.SelectedItems[0].ToString();
+                SelectedPodcast = podcastName;
+                var nameAndEpisode = XMLHandler.GetEpisodes(podcastName);
                 lvEpisodes.Items.Clear();
                 for (int i = 0; i < nameAndEpisode.Count; i++)
                 {
@@ -157,19 +160,12 @@ namespace IvanochJoseftest
         {
             if (lvEpisodes.SelectedItems.Count > 0)
             {
-                var nameAndEpisode = XMLHandler.GetEpisodes(lvPodcast.SelectedItems[0].ToString());
-                lvEpisodes.Items.Clear();
-                for (int i = 0; i < nameAndEpisode.Count; i++)
-                {
-                    string episodeNumber = i.ToString();
-                    string name;
-                    nameAndEpisode.TryGetValue(episodeNumber, out name);
-                    lvEpisodes.Items.Add(episodeNumber).SubItems.Add(name);
-                }
+                var EpisodeName = lvEpisodes.SelectedItems[0].SubItems[1].ToString();
+                var PodDesciption = XMLHandler.GetEpisodeInfo(SelectedPodcast, EpisodeName);
+                lbDescription.Items.Clear();
+                lbDescription.Items.Add(PodDesciption);
 
             }
-            //Denna blir lurig. Måste hämta namnet på podden samt avsnittsnamnet och få ut beskrivningen.
-            //NEVERMIND! Vi sparar en variabel med namnet på podden i Form1 och använder den för info. 
         }
     }
 }
