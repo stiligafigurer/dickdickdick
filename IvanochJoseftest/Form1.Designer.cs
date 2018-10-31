@@ -55,6 +55,7 @@ namespace IvanochJoseftest
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cbUppFrek = new System.Windows.Forms.ComboBox();
             this.cbKategori = new System.Windows.Forms.ComboBox();
+            this.lbDescription = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // button2
@@ -100,6 +101,7 @@ namespace IvanochJoseftest
             this.lvEpisodes.TabIndex = 4;
             this.lvEpisodes.UseCompatibleStateImageBehavior = false;
             this.lvEpisodes.View = System.Windows.Forms.View.Details;
+            this.lvEpisodes.SelectedIndexChanged += new System.EventHandler(this.lvEpisodes_SelectedIndexChanged);
             // 
             // Nummer
             // 
@@ -142,6 +144,7 @@ namespace IvanochJoseftest
             this.btnTaBortKategori.TabIndex = 7;
             this.btnTaBortKategori.Text = "Ta bort";
             this.btnTaBortKategori.UseVisualStyleBackColor = true;
+            this.btnTaBortKategori.Click += new System.EventHandler(this.btnTaBortKategori_Click_1);
             // 
             // tbKategori
             // 
@@ -268,11 +271,22 @@ namespace IvanochJoseftest
             this.cbKategori.Size = new System.Drawing.Size(121, 24);
             this.cbKategori.TabIndex = 18;
             // 
+            // lbDescription
+            // 
+            this.lbDescription.FormattingEnabled = true;
+            this.lbDescription.ItemHeight = 20;
+            this.lbDescription.Location = new System.Drawing.Point(730, 323);
+            this.lbDescription.Name = "lbDescription";
+            this.lbDescription.Size = new System.Drawing.Size(375, 324);
+            this.lbDescription.TabIndex = 19;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(993, 533);
+
+            this.ClientSize = new System.Drawing.Size(1117, 666);
+            this.Controls.Add(this.lbDescription);
             this.Controls.Add(this.cbKategori);
             this.Controls.Add(this.cbUppFrek);
             this.Controls.Add(this.lvPodcast);
@@ -333,6 +347,7 @@ namespace IvanochJoseftest
         private System.Windows.Forms.ColumnHeader Nummer;
         private System.Windows.Forms.ColumnHeader Datum;
         public System.Windows.Forms.TextBox tbURL;
+        private System.Windows.Forms.ListBox lbDescription;
     }
 }
 

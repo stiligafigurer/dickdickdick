@@ -19,18 +19,16 @@ namespace IvanochJoseftest
     {
 
         List<string> kategorier = new List<string>();
+        string SelectedPodcast = "";
 
         public Form1()
         {
             InitializeComponent();
-            //hej
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             button2.Text = "B=======D";
-
 
         }
 
@@ -45,57 +43,37 @@ namespace IvanochJoseftest
 
         }
 
-        /*private void saveStuff() {
-            var fs = new FileStream(@"text.xml", FileMode.Create, FileAccess.Write);
-            var sw = new StreamWriter(fs);
-            for (var i = 1; i < lvEpisodes.Items.Count; i++)
-            {
-                sw.WriteLine(lvEpisodes.Items[i].Text);
-                
-
-            };
-            sw.Close();
-        }*/
-
         private void lvPodcast_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             if (lvPodcast.SelectedItems.Count > 0)
             {
-                var nameAndEpisode = XMLHandler.GetEpisodes(lvPodcast.SelectedItems[0].ToString());
+                string podcastName = lvPodcast.SelectedItems[0].ToString();
+                SelectedPodcast = podcastName;
+                var nameAndEpisode = XMLHandler.GetEpisodes(podcastName);
+                lvEpisodes.Items.Clear();
                 for (int i = 0; i < nameAndEpisode.Count; i++)
                 {
                     string episodeNumber = i.ToString();
-                    string name;
-                    nameAndEpisode.TryGetValue(episodeNumber, out name);
+                    nameAndEpisode.TryGetValue(episodeNumber, out string name);
                     lvEpisodes.Items.Add(episodeNumber).SubItems.Add(name);
                 }
 
             }
-            
-
-            //saveStuff();
-
         }
 
         private void UpdateList()
         {
-           // lbKategori.Items.Clear();
-
-            foreach (var kategori in kategorier)
-            {
-                lbKategori.Items.Add(
-                kategori
-                );
-            }
+           
         }
 
         private void FillCB()
         {
-            //cbKategori.Items.Clear();
+            cbKategori.Items.Clear();
+            var listOfCategories = XMLCategoryHandler.ReadAllCategoriesFromXML();
 
-            foreach (var kategori in kategorier)
+            foreach (var item in listOfCategories)
             {
-                cbKategori.Items.Add(kategori);
+                cbKategori.Items.Add(item);
             }
         }
 
@@ -103,19 +81,12 @@ namespace IvanochJoseftest
         {
             if (Validering.IsFilled(tbKategori.Text))
             {
-                XMLCategoryHandler handler = new XMLCategoryHandler();
-                if(handler.WriteToXML(tbKategori.Text))
+                if(XMLCategoryHandler.WriteToXML(tbKategori.Text))
                 {
-                    lbKategori.Items.Clear();
-                    kategorier.Add(tbKategori.Text);
-                    foreach (string item in kategorier)
-                    {
-                        lbKategori.Items.Add(item);
-                    }
-
+                   lbKategori.Items.Add(tbKategori.Text);
                 }
                 FillCB();
-                //updatelist();
+
                 lbKategori.Sorted = true;
                 tbKategori.Clear();
             
@@ -147,55 +118,60 @@ namespace IvanochJoseftest
 
         }
 
-        private void btnTaBortKategori_Click(object sender, EventArgs e)
-        {
-            var kategori = lbKategori.SelectedItems.ToString();
+        //private void btnTaBortKategori_Click(object sender, EventArgs e)
+        //{
+        //    var kategori = lbKategori.SelectedItems.ToString();
+        //    tbKategori.Clear();
+        //    XMLCategoryHandler.RemoveCategoryFromXML(kategori);
+        //    FillCB();
+        //    ListBoxOnLoad();
 
-
-
-            //foreach (string item in kategorier)
-            //{
-            //    if (item == kategori)
-            //    {
-            lbKategori.Items.Remove(lbKategori.SelectedItem);
-            kategorier.Remove(kategori);
-            //    }
-            //}
-
-
-            //kategorier.Sort();
-
-            //UpdateList();
-
-            tbKategori.Clear();
-
-            FillCB();
-
-        }
+        //}
         public void ListBoxOnLoad()
         {
-            //string path = @"hej.txt";
-            //using (StreamReader sr = new StreamReader(path))
-            //{
-            //    while (!sr.EndOfStream)
-            //    {
-            //        lbKategori.Items.Add(Convert.ToString(sr.ReadLine()));
-            //        FillCB();
-            //        UpdateList();
-            //    }
 
-            //}
-
-
+            lbKategori.Items.Clear();
+            var ArrOfCategories = XMLCategoryHandler.ReadAllCategoriesFromXML();
+            foreach(string item in ArrOfCategories)
+            {
+                lbKategori.Items.Add(item);
+            }
+            lbKategori.Sorted = true;
         }
+
         public void ComboBoxOnLoad()
         {
-            //string[] lineOfContents = File.ReadAllLines("hej.txt");
-            //foreach (var line in lineOfContents)
-            //{
-            //    string[] tokens = line.Split(',');
-            //    cbKategori.Items.Add(tokens[0]);
-            //}
+
+            string[] lineOfContents = File.ReadAllLines("Kategorier.xml");
+            foreach (var line in lineOfContents)
+            {
+                var SplitOn = new string[] { "\r\n" };
+                var ArrOfTokens = line.Split(SplitOn, StringSplitOptions.None);
+                cbKategori.Items.Add(ArrOfTokens[0]);
+            }
+        }
+
+        private void btnTaBortKategori_Click_1(object sender, EventArgs e)
+        {
+            var kategori = lbKategori.SelectedItem.ToString();
+            tbKategori.Clear();
+            if (XMLCategoryHandler.RemoveCategoryFromXML(kategori))
+            {
+                FillCB();
+                ListBoxOnLoad();
+            }
+        }
+
+        private void lvEpisodes_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (lvEpisodes.SelectedItems.Count > 0)
+            {
+                var EpisodeName = lvEpisodes.SelectedItems[0].SubItems[1].ToString();
+                var PodDesciption = XMLHandler.GetEpisodeInfo(SelectedPodcast, EpisodeName);
+                lbDescription.Items.Clear();
+                lbDescription.Items.Add(PodDesciption);
+
+            }
         }
     }
 }
