@@ -97,8 +97,8 @@ namespace IvanochJoseftest
 
         private void btnNyPodcast_Click(object sender, EventArgs e)
         {
-            // && Validering.TrueURL(tbURL.Text))
-            if (Validering.IsFilled(tbURL.Text)) {
+            
+            if (Validering.IsFilled(tbURL.Text) && Validering.TrueURL(tbURL.Text)) {
             var nameAndNumOfEps = XMLHandler.GetPodcast(tbURL.Text);
 
             string episodeCount = nameAndNumOfEps[0];
