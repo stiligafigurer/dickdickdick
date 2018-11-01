@@ -36,14 +36,14 @@ namespace IvanochJoseftest.Data
             return myList;
         }
 
-        public static string[] GetPodcast(string url, string Kategori)
+        public static string[] GetPodcast(string url, string Kategori, int TimerIndex)
         {
             
                 
             XmlReader reader = XmlReader.Create(url);
             SyndicationFeed feed = SyndicationFeed.Load(reader);
             reader.Close();
-            XMLPodcastHandler.WriteToXML(feed, Kategori);
+            XMLPodcastHandler.WriteToXML(feed, Kategori, TimerIndex);
             string[] arrOfPodInfo = new string[2];
             arrOfPodInfo[0] = feed.Title.Text;
             arrOfPodInfo[1] = feed.Items.Count().ToString();
