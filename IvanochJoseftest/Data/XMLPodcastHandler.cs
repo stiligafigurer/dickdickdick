@@ -35,7 +35,6 @@ namespace IvanochJoseftest.Data
             XmlWriter writer = XmlWriter.Create(Path);
             StreamWriter sr = File.AppendText(@"Database//" + PoddNamn + "- KoT.txt");
             sr.WriteLine(Kategori);
-            //sr.WriteLine(Timer);
             feed.SaveAsRss20(writer);
             writer.Close();
             sr.Close();
