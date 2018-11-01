@@ -98,15 +98,15 @@ namespace IvanochJoseftest
         private void btnNyPodcast_Click(object sender, EventArgs e)
         {
             if (Validering.IsFilled(tbURL.Text) && Validering.TrueURL(tbURL.Text) && Validering.KategoriCheck(cbKategori.Text)) {
-            var nameAndNumOfEps = XMLHandler.GetPodcast(tbURL.Text);
+                var Kategori = tbKategori.SelectedText;
+                var nameAndNumOfEps = XMLHandler.GetPodcast(tbURL.Text, Kategori);
+                string episodeCount = nameAndNumOfEps[0];
+                string name = nameAndNumOfEps[1];
+                lvPodcast.Items.Add(episodeCount).SubItems.Add(name);
+                //saveStuff();
 
-            string episodeCount = nameAndNumOfEps[0];
-            string name = nameAndNumOfEps[1];
-            lvPodcast.Items.Add(episodeCount).SubItems.Add(name);
-            //saveStuff();
 
-
-            FillCB();
+                FillCB();
 
 
             }
