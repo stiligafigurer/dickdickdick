@@ -28,13 +28,17 @@ namespace IvanochJoseftest.Data
             }
         }
 
-        public static bool WriteToXML(SyndicationFeed feed)
+        public static bool WriteToXML(SyndicationFeed feed, string Kategori)
         {
             var PoddNamn = feed.Title.Text;
-            var path = @"Database//" + PoddNamn + ".xml";
-            XmlWriter writer = XmlWriter.Create(path);
+            var Path = @"Database//" + PoddNamn + ".xml";
+            XmlWriter writer = XmlWriter.Create(Path);
+            StreamWriter sr = File.AppendText(@"Database//" + PoddNamn + "- KoT.txt");
+            sr.WriteLine(Kategori);
             feed.SaveAsRss20(writer);
             writer.Close();
+            sr.Close();
+        
             return true;
         }
     }
