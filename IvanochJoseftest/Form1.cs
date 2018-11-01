@@ -97,19 +97,15 @@ namespace IvanochJoseftest
 
         private void btnNyPodcast_Click(object sender, EventArgs e)
         {
-            // && Validering.TrueURL(tbURL.Text))
             if (Validering.IsFilled(tbURL.Text)) {
-            var nameAndNumOfEps = XMLHandler.GetPodcast(tbURL.Text);
+                string Kategori = cbKategori.SelectedItem.ToString();
+                var nameAndNumOfEps = XMLHandler.GetPodcast(tbURL.Text, Kategori);
+                string episodeCount = nameAndNumOfEps[0];
+                string name = nameAndNumOfEps[1];
+                lvPodcast.Items.Add(episodeCount).SubItems.Add(name);
+                FillCB();
 
-            string episodeCount = nameAndNumOfEps[0];
-            string name = nameAndNumOfEps[1];
-            lvPodcast.Items.Add(episodeCount).SubItems.Add(name);
-            //saveStuff();
-
-
-            FillCB();
-
-        }
+            }
 
         }
 
@@ -118,15 +114,6 @@ namespace IvanochJoseftest
 
         }
 
-        //private void btnTaBortKategori_Click(object sender, EventArgs e)
-        //{
-        //    var kategori = lbKategori.SelectedItems.ToString();
-        //    tbKategori.Clear();
-        //    XMLCategoryHandler.RemoveCategoryFromXML(kategori);
-        //    FillCB();
-        //    ListBoxOnLoad();
-
-        //}
         public void ListBoxOnLoad()
         {
 
