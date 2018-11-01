@@ -17,7 +17,6 @@ namespace IvanochJoseftest.Data
             var path = @"Database//" + PoddNamn + ".xml";
             if (File.Exists(path))
             {
-
                 XmlReader reader = XmlReader.Create(path);
                 SyndicationFeed feed = SyndicationFeed.Load(reader);
                 return feed;
