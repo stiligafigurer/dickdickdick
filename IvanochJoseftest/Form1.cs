@@ -97,13 +97,17 @@ namespace IvanochJoseftest
 
         private void btnNyPodcast_Click(object sender, EventArgs e)
         {
-            if (Validering.IsFilled(tbURL.Text)) {
-                string Kategori = cbKategori.SelectedItem.ToString();
-                var nameAndNumOfEps = XMLHandler.GetPodcast(tbURL.Text, Kategori);
-                string episodeCount = nameAndNumOfEps[0];
-                string name = nameAndNumOfEps[1];
-                lvPodcast.Items.Add(episodeCount).SubItems.Add(name);
-                FillCB();
+            if (Validering.IsFilled(tbURL.Text) && Validering.TrueURL(tbURL.Text) && Validering.KategoriCheck(cbKategori.Text)) {
+            var nameAndNumOfEps = XMLHandler.GetPodcast(tbURL.Text);
+
+            string episodeCount = nameAndNumOfEps[0];
+            string name = nameAndNumOfEps[1];
+            lvPodcast.Items.Add(episodeCount).SubItems.Add(name);
+            //saveStuff();
+
+
+            FillCB();
+
 
             }
 
@@ -153,12 +157,36 @@ namespace IvanochJoseftest
         {
             if (lvEpisodes.SelectedItems.Count > 0)
             {
+                
+
                 var EpisodeName = lvEpisodes.SelectedItems[0].SubItems[1].ToString();
                 var PodDesciption = XMLHandler.GetEpisodeInfo(SelectedPodcast, EpisodeName);
-                lbDescription.Items.Clear();
-                lbDescription.Items.Add(PodDesciption);
+                int length = EpisodeName.Length - 19;
+                EpisodeName = EpisodeName.Substring(18, length);
 
+                var avsnitt = lvEpisodes.FocusedItem.Index;
+                
+                tbDescription.Clear();
+                tbDescription.AppendText(PodDesciption);
+                
+;
+                label5.Text = "";
+                label5.Text += avsnitt + ":" + EpisodeName;
             }
         }
+//        private void Alarm5min()
+//        {
+//            Timer t = new Timer();
+
+
+//            t.Interval = 50000; // specify interval time as you want
+//            t.Tick += new EventHandler(timer_Tick);
+//            t.Start();
+//        }
+
+//void timer_Tick(object sender, EventArgs e)
+//        {
+//            MessageBox.Show("Alarm alarm beep beep");
+//        }
     }
 }

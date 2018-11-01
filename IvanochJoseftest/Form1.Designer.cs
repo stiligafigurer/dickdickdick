@@ -55,7 +55,8 @@ namespace IvanochJoseftest
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cbUppFrek = new System.Windows.Forms.ComboBox();
             this.cbKategori = new System.Windows.Forms.ComboBox();
-            this.lbDescription = new System.Windows.Forms.ListBox();
+            this.tbDescription = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button2
@@ -271,22 +272,31 @@ namespace IvanochJoseftest
             this.cbKategori.Size = new System.Drawing.Size(121, 24);
             this.cbKategori.TabIndex = 18;
             // 
-            // lbDescription
+            // tbDescription
             // 
-            this.lbDescription.FormattingEnabled = true;
-            this.lbDescription.ItemHeight = 20;
-            this.lbDescription.Location = new System.Drawing.Point(730, 323);
-            this.lbDescription.Name = "lbDescription";
-            this.lbDescription.Size = new System.Drawing.Size(375, 324);
-            this.lbDescription.TabIndex = 19;
+            this.tbDescription.Location = new System.Drawing.Point(733, 280);
+            this.tbDescription.Multiline = true;
+            this.tbDescription.Name = "tbDescription";
+            this.tbDescription.ReadOnly = true;
+            this.tbDescription.Size = new System.Drawing.Size(342, 244);
+            this.tbDescription.TabIndex = 20;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(730, 258);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(46, 17);
+            this.label5.TabIndex = 21;
+            this.label5.Text = "label5";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-
             this.ClientSize = new System.Drawing.Size(1117, 666);
-            this.Controls.Add(this.lbDescription);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.tbDescription);
             this.Controls.Add(this.cbKategori);
             this.Controls.Add(this.cbUppFrek);
             this.Controls.Add(this.lvPodcast);
@@ -347,7 +357,8 @@ namespace IvanochJoseftest
         private System.Windows.Forms.ColumnHeader Nummer;
         private System.Windows.Forms.ColumnHeader Datum;
         public System.Windows.Forms.TextBox tbURL;
-        private System.Windows.Forms.ListBox lbDescription;
+        private System.Windows.Forms.TextBox tbDescription;
+        private System.Windows.Forms.Label label5;
     }
 }
 
