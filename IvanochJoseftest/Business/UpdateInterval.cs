@@ -7,10 +7,10 @@ using System.Windows.Forms;
 
 namespace IvanochJoseftest.Business
 {
-    class UpdateInterval
+    class UpdateInterval : Form1
     {
         
-        //Nytt objekt för varje podd
+        
 
         public void SetInterval5Min()
         {

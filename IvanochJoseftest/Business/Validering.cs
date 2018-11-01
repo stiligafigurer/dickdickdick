@@ -13,10 +13,11 @@ namespace IvanochJoseftest.Business
     {
         public static bool IsFilled(string input)
         {
-           if (input != "")
+            if (input != "")
             {
                 return true;
-            } else
+            }
+            else
             {
                 MessageBox.Show("Fältet får inte lämnas tomt!");
                 return false;
@@ -31,12 +32,26 @@ namespace IvanochJoseftest.Business
                 SyndicationFeed feed = SyndicationFeed.Load(reader);
                 reader.Close();
                 return true;
-            } catch
+            }
+            catch
             {
                 MessageBox.Show("Skriv in en korrekt URL till en RSS-feed.");
                 return false;
             }
         }
 
+        public static bool KategoriCheck(string kategori)
+        {
+
+            if (kategori != "")
+            {
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Välj en kategori som podden ska tillhöra.");
+                return false;
+            }
+        }
     }
 }
