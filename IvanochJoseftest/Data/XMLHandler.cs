@@ -18,22 +18,32 @@ namespace IvanochJoseftest.Data
             name = name.Substring(15, length);
             Dictionary<string, string> myList = new Dictionary<string, string>();
             SyndicationFeed feed = XMLPodcastHandler.ReadFromXML(name);
+            double LastEpisodeNumber = 0;
             foreach (SyndicationItem item in feed.Items)
             {
-                string[] PodContent = item.Title.Text.Split('.');
-                myList.Add(PodContent[0], PodContent[1]);
+                try
+                {
+                    string[] PodContent = item.Title.Text.Split('.');
+                    myList.Add(PodContent[0], PodContent[1]);
+                    LastEpisodeNumber = Int32.Parse(PodContent[0]);
+                }
+                catch(Exception e)
+                {
+                    string PodContent = item.Title.Text;
+                    myList.Add((LastEpisodeNumber + 0.5).ToString(), PodContent.ToString());
+                }
             }
             return myList;
         }
 
-        public static string[] GetPodcast(string url)
+        public static string[] GetPodcast(string url, string Kategori)
         {
             
                 
             XmlReader reader = XmlReader.Create(url);
             SyndicationFeed feed = SyndicationFeed.Load(reader);
             reader.Close();
-            XMLPodcastHandler.WriteToXML(feed);
+            XMLPodcastHandler.WriteToXML(feed, Kategori);
             string[] arrOfPodInfo = new string[2];
             arrOfPodInfo[0] = feed.Title.Text;
             arrOfPodInfo[1] = feed.Items.Count().ToString();
