@@ -53,5 +53,18 @@ namespace IvanochJoseftest.Business
                 return false;
             }
         }
+        public static bool UppFrekCheck(string UppFrek)
+        {
+
+            if (UppFrek != "")
+            {
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Välj uppdateringsfrekvens på podcasten.");
+                return false;
+            }
+        }
     }
 }

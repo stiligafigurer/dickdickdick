@@ -29,7 +29,6 @@ namespace IvanochJoseftest
         private void button2_Click(object sender, EventArgs e)
         {
             button2.Text = "B=======D";
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -97,7 +96,7 @@ namespace IvanochJoseftest
 
         private void btnNyPodcast_Click(object sender, EventArgs e)
         {
-            if (Validering.IsFilled(tbURL.Text) && Validering.TrueURL(tbURL.Text) && Validering.KategoriCheck(cbKategori.Text)) {
+            if (Validering.IsFilled(tbURL.Text) && Validering.TrueURL(tbURL.Text) && Validering.KategoriCheck(cbKategori.Text) && Validering.UppFrekCheck(cbUppFrek.Text)) {
                 var Kategori = cbKategori.SelectedItem.ToString();
                 int TimerIndex = 0; 
                 switch (cbUppFrek.SelectedIndex)
@@ -119,9 +118,6 @@ namespace IvanochJoseftest
                 string episodeCount = nameAndNumOfEps[0];
                 string name = nameAndNumOfEps[1];
                 lvPodcast.Items.Add(episodeCount).SubItems.Add(name);
-                //saveStuff();
-
-
                 FillCB();
 
 
