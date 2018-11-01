@@ -29,7 +29,6 @@ namespace IvanochJoseftest
         private void button2_Click(object sender, EventArgs e)
         {
             button2.Text = "B=======D";
-
         }
 
         private void Form1_Load(object sender, EventArgs e)

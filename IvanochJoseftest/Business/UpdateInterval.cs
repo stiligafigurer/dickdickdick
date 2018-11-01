@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IvanochJoseftest.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,12 +13,39 @@ namespace IvanochJoseftest.Business
         
         
 
-        public void SetInterval5Min()
+        public void SetInt5Min()
+        {
+            Timer t = new Timer();
+            
+            t.Interval = 5000; // specify interval time as you want
+            t.Tick += new EventHandler(timer_Tick);
+            t.Start();
+
+        }
+        public void SetInt10Min()
         {
             Timer t = new Timer();
 
+            t.Interval = 10000; // specify interval time as you want
+            t.Tick += new EventHandler(timer_Tick);
+            t.Start();
 
-            t.Interval = 5000; // specify interval time as you want
+        }
+        public void SetInt15Min()
+        {
+            Timer t = new Timer();
+
+            t.Interval = 15000; // specify interval time as you want
+            t.Tick += new EventHandler(timer_Tick);
+            t.Start();
+
+        }
+
+        public void SetInt30Min()
+        {
+            Timer t = new Timer();
+
+            t.Interval = 30000; // specify interval time as you want
             t.Tick += new EventHandler(timer_Tick);
             t.Start();
 
