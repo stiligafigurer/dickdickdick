@@ -28,7 +28,7 @@ namespace IvanochJoseftest.Data
                     myList.Add(PodContent[0], PodContent[1]);
                     LastEpisodeNumber = Int32.Parse(PodContent[0]);
                 }
-                catch(Exception e)
+                catch(Exception)
                 {
                     string PodContent = item.Title.Text;
                     myList.Add((LastEpisodeNumber + 0.5).ToString(), PodContent.ToString());
@@ -58,6 +58,7 @@ namespace IvanochJoseftest.Data
             SyndicationFeed feed = XMLPodcastHandler.ReadFromXML(Name);
             StreamReader reader = new StreamReader(@"Database//" +"KoT$" + Name + ".txt");
             string Content = reader.ReadToEnd();
+            reader.Close();
             var SplitOn = new string[] { "\r\n" };
             string[] KategoriOchTimer = Content.Split(SplitOn, StringSplitOptions.None);
             string[] arrOfPodInfo = new string[4];

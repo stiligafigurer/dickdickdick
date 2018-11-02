@@ -59,6 +59,7 @@ namespace IvanochJoseftest.Data
             return false;
             
         }
+        
 
         public static string[] ReadAllCategoriesFromXML()
         {
