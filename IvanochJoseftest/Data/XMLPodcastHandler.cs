@@ -45,5 +45,20 @@ namespace IvanochJoseftest.Data
         
             return true;
         }
+
+        public static bool RemoveXML(string PoddNamn)
+        {
+            if(File.Exists(PoddNamn + ".xml"))
+            {
+                File.Delete(PoddNamn + ".xml");
+                if(File.Exists("KoT$" + PoddNamn + ".txt"))
+                {
+                    File.Delete("KoT$" + PoddNamn + ".txt");
+                    return true;
+                }
+                return true;
+            }
+            return false;
+        }
     }
 }
