@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 using System.Windows.Forms;
 
 namespace IvanochJoseftest.Business
@@ -13,45 +14,15 @@ namespace IvanochJoseftest.Business
         
         
 
-        public void SetInt5Min()
+        public void SetInt(int newTime)
         {
-            Timer t = new Timer();
-            
-            t.Interval = 5000; // specify interval time as you want
-            t.Tick += new EventHandler(timer_Tick);
-            t.Start();
-
-        }
-        public void SetInt10Min()
-        {
-            Timer t = new Timer();
-
-            t.Interval = 10000; // specify interval time as you want
-            t.Tick += new EventHandler(timer_Tick);
-            t.Start();
-
-        }
-        public void SetInt15Min()
-        {
-            Timer t = new Timer();
-
-            t.Interval = 15000; // specify interval time as you want
-            t.Tick += new EventHandler(timer_Tick);
-            t.Start();
+            var timer = new System.Timers.Timer(newTime); 
+            timer.Elapsed += HandleTimerElapsed;
+            timer.Start();
 
         }
 
-        public void SetInt30Min()
-        {
-            Timer t = new Timer();
-
-            t.Interval = 30000; // specify interval time as you want
-            t.Tick += new EventHandler(timer_Tick);
-            t.Start();
-
-        }
-
-        public void timer_Tick(object sender, EventArgs e)
+        public void HandleTimerElapsed(object sender, ElapsedEventArgs e)
         {
             MessageBox.Show("Satana perkele");
         }

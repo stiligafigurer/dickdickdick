@@ -29,6 +29,9 @@ namespace IvanochJoseftest
         private void button2_Click(object sender, EventArgs e)
         {
             button2.Text = "B=======D";
+            Alarm5min();
+            UpdateInterval interval = new UpdateInterval();
+            interval.SetInt(5000);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -96,6 +99,7 @@ namespace IvanochJoseftest
 
         private void btnNyPodcast_Click(object sender, EventArgs e)
         {
+            
             if (Validering.IsFilled(tbURL.Text) && Validering.TrueURL(tbURL.Text) && Validering.KategoriCheck(cbKategori.Text) && Validering.UppFrekCheck(cbUppFrek.Text)) {
                 var Kategori = cbKategori.SelectedItem.ToString();
                 int TimerIndex = 0; 
@@ -119,7 +123,7 @@ namespace IvanochJoseftest
                 string name = nameAndNumOfEps[1];
                 lvPodcast.Items.Add(episodeCount).SubItems.Add(name);
                 FillCB();
-
+                tbURL.Clear();
 
             }
 
@@ -186,19 +190,19 @@ namespace IvanochJoseftest
                 label5.Text += avsnitt + ":" + EpisodeName;
             }
         }
-//        private void Alarm5min()
-//        {
-//            Timer t = new Timer();
+        private void Alarm5min()
+        {
+            Timer t = new Timer();
 
 
-//            t.Interval = 50000; // specify interval time as you want
-//            t.Tick += new EventHandler(timer_Tick);
-//            t.Start();
-//        }
+            t.Interval = 5000; // specify interval time as you want
+            t.Tick += new EventHandler(timer_Tick);
+            t.Start();
+        }
 
-//void timer_Tick(object sender, EventArgs e)
-//        {
-//            MessageBox.Show("Alarm alarm beep beep");
-//        }
+        void timer_Tick(object sender, EventArgs e)
+        {
+            MessageBox.Show("Alarm alarm beep beep");
+        }
     }
 }
