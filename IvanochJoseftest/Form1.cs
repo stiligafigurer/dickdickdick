@@ -37,12 +37,7 @@ namespace IvanochJoseftest
             ComboBoxOnLoad();
             FetchAllPodcastOnLoad();
         }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
+        
         private void lvPodcast_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             if (lvPodcast.SelectedItems.Count > 0)
@@ -59,11 +54,6 @@ namespace IvanochJoseftest
                 }
 
             }
-        }
-
-        private void UpdateList()
-        {
-           
         }
 
         private void FillCB()
@@ -92,9 +82,7 @@ namespace IvanochJoseftest
             
             }
         }
-
-
-
+        
         private void btnNyPodcast_Click(object sender, EventArgs e)
         {
             if (Validering.IsFilled(tbURL.Text) && Validering.TrueURL(tbURL.Text) && Validering.KategoriCheck(cbKategori.Text) && Validering.UppFrekCheck(cbUppFrek.Text)) {
@@ -123,11 +111,6 @@ namespace IvanochJoseftest
 
 
             }
-
-        }
-
-        private void tbKategori_TextChanged(object sender, EventArgs e)
-        {
 
         }
 
@@ -214,5 +197,18 @@ namespace IvanochJoseftest
             
         }
 
+        private void btnTaBortPodcast_Click(object sender, EventArgs e)
+        {
+            if(lvPodcast.SelectedItems.Count > 0 && lvPodcast.SelectedItems.Count < 2)
+            {
+                var Namn = lvPodcast.SelectedItems[0].Text;
+                XMLPodcastHandler.RemoveXML(Namn);
+                lvPodcast.SelectedItems[0].Remove();
+            }
+            else
+            {
+                MessageBox.Show("FEL!");
+            }
+        }
     }
 }

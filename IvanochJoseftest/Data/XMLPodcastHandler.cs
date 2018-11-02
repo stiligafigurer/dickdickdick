@@ -19,6 +19,7 @@ namespace IvanochJoseftest.Data
             {
                 XmlReader reader = XmlReader.Create(path);
                 SyndicationFeed feed = SyndicationFeed.Load(reader);
+                reader.Close();
                 return feed;
             }
             else
@@ -48,12 +49,12 @@ namespace IvanochJoseftest.Data
 
         public static bool RemoveXML(string PoddNamn)
         {
-            if(File.Exists(PoddNamn + ".xml"))
+            if(File.Exists(@"Database//" + PoddNamn + ".xml"))
             {
-                File.Delete(PoddNamn + ".xml");
-                if(File.Exists("KoT$" + PoddNamn + ".txt"))
+               File.Delete(@"Database//" + PoddNamn + ".xml");
+                if(File.Exists(@"Database//KoT$" + PoddNamn + ".txt"))
                 {
-                    File.Delete("KoT$" + PoddNamn + ".txt");
+                    File.Delete(@"Database//KoT$" + PoddNamn + ".txt");
                     return true;
                 }
                 return true;
