@@ -29,9 +29,6 @@ namespace IvanochJoseftest
         private void button2_Click(object sender, EventArgs e)
         {
             button2.Text = "B=======D";
-            Alarm5min();
-            UpdateInterval interval = new UpdateInterval();
-            interval.SetInt(5000);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -108,6 +105,7 @@ namespace IvanochJoseftest
                         break;
                 }
                 var nameAndNumOfEps = XMLHandler.GetPodcast(tbURL.Text, Kategori, TimerIndex);
+                UpdateInterval NewTmer = new UpdateInterval(TimerIndex, tbURL.Text, Kategori);
                 string episodeCount = nameAndNumOfEps[0];
                 string name = nameAndNumOfEps[1];
                 lvPodcast.Items.Add(episodeCount).SubItems.Add(name);

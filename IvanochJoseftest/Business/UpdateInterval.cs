@@ -11,9 +11,23 @@ namespace IvanochJoseftest.Business
 {
     class UpdateInterval : Form1
     {
-        
-        
+        private string Url = "";
+        private string Kategori = "";
+        private int Timer = 0;
 
+        public UpdateInterval(int time, string Url, string Kategori)
+        {
+            this.Url = Url;
+            this.Kategori = Kategori;
+            this.Timer = TimerConverter(time);
+            SetInt(Timer);
+        }
+
+        private int TimerConverter(int timer)
+        {
+            int MsTimer = (timer * 60) * 1000;
+            return MsTimer;
+        }
         public void SetInt(int newTime)
         {
             var timer = new System.Timers.Timer(newTime); 
@@ -24,7 +38,8 @@ namespace IvanochJoseftest.Business
 
         public void HandleTimerElapsed(object sender, ElapsedEventArgs e)
         {
-            MessageBox.Show("Satana perkele");
+            XMLHandler.GetPodcast(Url, Kategori, Timer);
+            MessageBox.Show("Hej, det funkar");
         }
 
         
