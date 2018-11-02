@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.ServiceModel.Syndication;
 using System.Text;
@@ -27,7 +28,7 @@ namespace IvanochJoseftest.Data
                     myList.Add(PodContent[0], PodContent[1]);
                     LastEpisodeNumber = Int32.Parse(PodContent[0]);
                 }
-                catch(Exception e)
+                catch(Exception)
                 {
                     string PodContent = item.Title.Text;
                     myList.Add((LastEpisodeNumber + 0.5).ToString(), PodContent.ToString());
@@ -39,7 +40,7 @@ namespace IvanochJoseftest.Data
         public static string[] GetPodcast(string url, string Kategori, int TimerIndex)
         {
             
-                
+            
             XmlReader reader = XmlReader.Create(url);
             SyndicationFeed feed = SyndicationFeed.Load(reader);
             reader.Close();
@@ -50,6 +51,22 @@ namespace IvanochJoseftest.Data
             return arrOfPodInfo;
             
 
+        }
+
+        public static string[] GetPodcast(string Name)
+        {
+            SyndicationFeed feed = XMLPodcastHandler.ReadFromXML(Name);
+            StreamReader reader = new StreamReader(@"Database//" +"KoT$" + Name + ".txt");
+            string Content = reader.ReadToEnd();
+            reader.Close();
+            var SplitOn = new string[] { "\r\n" };
+            string[] KategoriOchTimer = Content.Split(SplitOn, StringSplitOptions.None);
+            string[] arrOfPodInfo = new string[4];
+            arrOfPodInfo[0] = feed.Title.Text;
+            arrOfPodInfo[1] = feed.Items.Count().ToString();
+            arrOfPodInfo[2] = KategoriOchTimer[1];
+            arrOfPodInfo[3] = KategoriOchTimer[0];
+            return arrOfPodInfo;
         }
 
         public static string GetEpisodeInfo(string PodName, string EpisodeName)
@@ -77,6 +94,32 @@ namespace IvanochJoseftest.Data
             {
                 throw e;
             }
+        }
+
+        public static void ChangeKategory(string QueryCategory)
+        {
+            DirectoryInfo d = new DirectoryInfo(@"Database//");
+            FileInfo[] Files = d.GetFiles("KoT$*.txt");
+            foreach(var file in Files)
+            {
+                StreamReader sr = new StreamReader(file.DirectoryName + "\\" + file.Name);
+                var SplitOn = new string[] { "\r\n" };
+                var ActualCategoryAndTimer = sr.ReadToEnd().Split(SplitOn, StringSplitOptions.None);
+                if(QueryCategory == ActualCategoryAndTimer[0])
+                {
+                    sr.Close();
+                    StreamWriter sw = new StreamWriter(file.DirectoryName + "\\" + file.Name);
+                    ActualCategoryAndTimer[0] = "Default";
+                    sw.Close();
+                    File.WriteAllLines((file.DirectoryName + "\\" + file.Name), ActualCategoryAndTimer);
+                }
+            }
+        }
+
+        public static int GetPodcastTimer(string PoddNamn)
+        {
+            //Fixa denna härnäst
+            return 1;
         }
     }
 }
