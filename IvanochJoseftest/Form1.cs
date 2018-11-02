@@ -29,7 +29,6 @@ namespace IvanochJoseftest
         private void button2_Click(object sender, EventArgs e)
         {
             button2.Text = "B=======D";
-            Alarm5min();
             UpdateInterval interval = new UpdateInterval();
             interval.SetInt(5000);
         }
