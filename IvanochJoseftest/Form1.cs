@@ -38,6 +38,7 @@ namespace IvanochJoseftest
         {
             ListBoxOnLoad();
             ComboBoxOnLoad();
+            FetchAllPodcastOnLoad();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -173,8 +174,6 @@ namespace IvanochJoseftest
         {
             if (lvEpisodes.SelectedItems.Count > 0)
             {
-                
-
                 var EpisodeName = lvEpisodes.SelectedItems[0].SubItems[1].ToString();
                 var PodDesciption = XMLHandler.GetEpisodeInfo(SelectedPodcast, EpisodeName);
                 int length = EpisodeName.Length - 19;
@@ -190,19 +189,51 @@ namespace IvanochJoseftest
                 label5.Text += avsnitt + ":" + EpisodeName;
             }
         }
-        private void Alarm5min()
+
+//        private void Alarm5min()
+ //       {
+ //           Timer t = new Timer();
+
+
+//            t.Interval = 5000; // specify interval time as you want
+//            t.Tick += new EventHandler(timer_Tick);
+//            t.Start();
+ //       }
+
+ //       void timer_Tick(object sender, EventArgs e)
+ //       {
+  //          MessageBox.Show("Alarm alarm beep beep");
+   //     }
+
+
+        private void FetchAllPodcastOnLoad()
         {
-            Timer t = new Timer();
-
-
-            t.Interval = 5000; // specify interval time as you want
-            t.Tick += new EventHandler(timer_Tick);
-            t.Start();
+            DirectoryInfo d = new DirectoryInfo(@"Database//");
+            FileInfo[] Files = d.GetFiles("*.xml");
+            List<string> listOfPodName = new List<string>();
+            Dictionary<string, string[]> dict = new Dictionary<string, string[]>();
+            foreach (var file in Files)
+            {
+                int length = file.Name.Length - 4;
+                string namn = file.Name.Substring(0, length);
+                listOfPodName.Add(namn);
+            }
+            foreach(var item in listOfPodName)
+            {
+                dict.Add(item, XMLHandler.GetPodcast(item));
+            }
+            foreach (var thing in dict.Values)
+            {
+                ListViewItem item = new ListViewItem();
+                item.Text = thing[0];
+                item.SubItems.Add(thing[1]);
+                item.SubItems.Add(thing[2]);
+                item.SubItems.Add(thing[3]);
+                lvPodcast.Items.Add(item);
+            }
+            
         }
 
-        void timer_Tick(object sender, EventArgs e)
-        {
-            MessageBox.Show("Alarm alarm beep beep");
-        }
+
     }
 }

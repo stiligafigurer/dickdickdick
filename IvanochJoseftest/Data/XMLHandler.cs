@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.ServiceModel.Syndication;
 using System.Text;
@@ -39,7 +40,7 @@ namespace IvanochJoseftest.Data
         public static string[] GetPodcast(string url, string Kategori, int TimerIndex)
         {
             
-                
+            
             XmlReader reader = XmlReader.Create(url);
             SyndicationFeed feed = SyndicationFeed.Load(reader);
             reader.Close();
@@ -50,6 +51,21 @@ namespace IvanochJoseftest.Data
             return arrOfPodInfo;
             
 
+        }
+
+        public static string[] GetPodcast(string Name)
+        {
+            SyndicationFeed feed = XMLPodcastHandler.ReadFromXML(Name);
+            StreamReader reader = new StreamReader(@"Database//" +"KoT$" + Name + ".txt");
+            string Content = reader.ReadToEnd();
+            var SplitOn = new string[] { "\r\n" };
+            string[] KategoriOchTimer = Content.Split(SplitOn, StringSplitOptions.None);
+            string[] arrOfPodInfo = new string[4];
+            arrOfPodInfo[0] = feed.Title.Text;
+            arrOfPodInfo[1] = feed.Items.Count().ToString();
+            arrOfPodInfo[2] = KategoriOchTimer[1];
+            arrOfPodInfo[3] = KategoriOchTimer[0];
+            return arrOfPodInfo;
         }
 
         public static string GetEpisodeInfo(string PodName, string EpisodeName)
