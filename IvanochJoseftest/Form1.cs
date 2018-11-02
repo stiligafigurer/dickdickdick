@@ -170,23 +170,7 @@ namespace IvanochJoseftest
                 label5.Text += avsnitt + ":" + EpisodeName;
             }
         }
-
-//        private void Alarm5min()
- //       {
- //           Timer t = new Timer();
-
-
-//            t.Interval = 5000; // specify interval time as you want
-//            t.Tick += new EventHandler(timer_Tick);
-//            t.Start();
- //       }
-
- //       void timer_Tick(object sender, EventArgs e)
- //       {
-  //          MessageBox.Show("Alarm alarm beep beep");
-   //     }
-
-
+        
         private void FetchAllPodcastOnLoad()
         {
             DirectoryInfo d = new DirectoryInfo(@"Database//");
@@ -228,6 +212,5 @@ namespace IvanochJoseftest
                 MessageBox.Show("FEL!");
             }
         }
-
     }
 }

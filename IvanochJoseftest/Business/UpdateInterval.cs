@@ -1,6 +1,7 @@
 ﻿using IvanochJoseftest.Data;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -30,7 +31,7 @@ namespace IvanochJoseftest.Business
         }
         public void SetInt(int newTime)
         {
-            var timer = new System.Timers.Timer(newTime); 
+            var timer = new System.Timers.Timer(newTime);
             timer.Elapsed += HandleTimerElapsed;
             timer.Start();
 
@@ -38,9 +39,11 @@ namespace IvanochJoseftest.Business
 
         public void HandleTimerElapsed(object sender, ElapsedEventArgs e)
         {
-            XMLHandler.GetPodcast(Url, Kategori, Timer);
-        }
 
-        
+            XMLHandler.GetPodcast(Url, Kategori, Timer);
+
+        }
     }
+
 }
+
