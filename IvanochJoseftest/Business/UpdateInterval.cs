@@ -39,7 +39,6 @@ namespace IvanochJoseftest.Business
         public void HandleTimerElapsed(object sender, ElapsedEventArgs e)
         {
             XMLHandler.GetPodcast(Url, Kategori, Timer);
-            MessageBox.Show("Hej, det funkar");
         }
 
         
