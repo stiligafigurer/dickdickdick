@@ -287,9 +287,8 @@ namespace IvanochJoseftest
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(730, 258);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(52, 17);
+            this.label5.Size = new System.Drawing.Size(0, 17);
             this.label5.TabIndex = 21;
-            this.label5.Text = "label5";
             // 
             // Form1
             // 
