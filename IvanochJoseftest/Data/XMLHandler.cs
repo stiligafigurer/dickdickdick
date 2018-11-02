@@ -95,5 +95,31 @@ namespace IvanochJoseftest.Data
                 throw e;
             }
         }
+
+        public static void ChangeKategory(string QueryCategory)
+        {
+            DirectoryInfo d = new DirectoryInfo(@"Database//");
+            FileInfo[] Files = d.GetFiles("KoT$*.txt");
+            foreach(var file in Files)
+            {
+                StreamReader sr = new StreamReader(file.DirectoryName + "\\" + file.Name);
+                var SplitOn = new string[] { "\r\n" };
+                var ActualCategoryAndTimer = sr.ReadToEnd().Split(SplitOn, StringSplitOptions.None);
+                if(QueryCategory == ActualCategoryAndTimer[0])
+                {
+                    sr.Close();
+                    StreamWriter sw = new StreamWriter(file.DirectoryName + "\\" + file.Name);
+                    ActualCategoryAndTimer[0] = "Default";
+                    sw.Close();
+                    File.WriteAllLines((file.DirectoryName + "\\" + file.Name), ActualCategoryAndTimer);
+                }
+            }
+        }
+
+        public static int GetPodcastTimer(string PoddNamn)
+        {
+            //Fixa denna härnäst
+            return 1;
+        }
     }
 }
