@@ -44,7 +44,7 @@ namespace IvanochJoseftest.Data
             XmlReader reader = XmlReader.Create(url);
             SyndicationFeed feed = SyndicationFeed.Load(reader);
             reader.Close();
-            XMLPodcastHandler.WriteToXML(feed, Kategori, TimerIndex);
+            XMLPodcastHandler.WriteToXML(feed, Kategori, TimerIndex, url);
             string[] arrOfPodInfo = new string[2];
             arrOfPodInfo[0] = feed.Title.Text;
             arrOfPodInfo[1] = feed.Items.Count().ToString();
@@ -96,7 +96,7 @@ namespace IvanochJoseftest.Data
             }
         }
 
-        public static void ChangeKategory(string QueryCategory)
+        public static void ChangeKategoryToDefault(string QueryCategory)
         {
             DirectoryInfo d = new DirectoryInfo(@"Database//");
             FileInfo[] Files = d.GetFiles("KoT$*.txt");
@@ -118,8 +118,56 @@ namespace IvanochJoseftest.Data
 
         public static int GetPodcastTimer(string PoddNamn)
         {
-            //Fixa denna härnäst
-            return 1;
+            DirectoryInfo d = new DirectoryInfo(@"Database//");
+            FileInfo[] Files = d.GetFiles("KoT$*.txt");
+            foreach (var file in Files)
+            {
+                if(file.Name == "KoT$" + PoddNamn + ".txt")
+                {
+                    StreamReader sr = new StreamReader(file.DirectoryName + "\\" + file.Name);
+                    var SplitOn = new string[] { "\r\n" };
+                    var CategoryAndTimer = sr.ReadToEnd().Split(SplitOn, StringSplitOptions.None);
+                    return Int32.Parse(CategoryAndTimer[1]);
+                }
+               
+            }
+            throw new Exception();
+        }
+
+        public static string GetPodcastCategory(string PoddNamn)
+        {
+            DirectoryInfo d = new DirectoryInfo(@"Database//");
+            FileInfo[] Files = d.GetFiles("KoT$*.txt");
+            foreach (var file in Files)
+            {
+                if (file.Name == "KoT$" + PoddNamn + ".txt")
+                {
+                    StreamReader sr = new StreamReader(file.DirectoryName + "\\" + file.Name);
+                    var SplitOn = new string[] { "\r\n" };
+                    var CategoryAndTimer = sr.ReadToEnd().Split(SplitOn, StringSplitOptions.None);
+                    return CategoryAndTimer[0];
+                }
+
+            }
+            throw new Exception();
+        }
+
+        public static string GetPodcastUrl(string PoddNamn)
+        {
+            DirectoryInfo d = new DirectoryInfo(@"Database//");
+            FileInfo[] Files = d.GetFiles("KoT$*.txt");
+            foreach (var file in Files)
+            {
+                if (file.Name == "KoT$" + PoddNamn + ".txt")
+                {
+                    StreamReader sr = new StreamReader(file.DirectoryName + "\\" + file.Name);
+                    var SplitOn = new string[] { "\r\n" };
+                    var CategoryAndTimer = sr.ReadToEnd().Split(SplitOn, StringSplitOptions.None);
+                    return CategoryAndTimer[2];
+                }
+
+            }
+            throw new Exception();
         }
     }
 }

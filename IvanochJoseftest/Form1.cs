@@ -196,7 +196,19 @@ namespace IvanochJoseftest
                 item.SubItems.Add(thing[3]);
                 lvPodcast.Items.Add(item);
             }
-            
+            SetPodcastTimersOnLoad(listOfPodName.ToArray());
+        }
+
+        private void SetPodcastTimersOnLoad(string[] PoddNames)
+        {
+            foreach(var podd in PoddNames)
+            {
+                int Timer = XMLHandler.GetPodcastTimer(podd);
+                string Category = XMLHandler.GetPodcastCategory(podd);
+                string Url = XMLHandler.GetPodcastUrl(podd);
+                new UpdateInterval(Timer, Url, Category);
+                
+            }
         }
         
         private void btnTaBortPodcast_Click(object sender, EventArgs e)

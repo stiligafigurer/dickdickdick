@@ -28,7 +28,7 @@ namespace IvanochJoseftest.Data
             }
         }
 
-        public static bool WriteToXML(SyndicationFeed feed, string Kategori, int TimerIndex)
+        public static bool WriteToXML(SyndicationFeed feed, string Kategori, int TimerIndex, string url)
         {
             var PoddNamn = feed.Title.Text;
             var Path = @"Database//" + PoddNamn + ".xml";
@@ -40,6 +40,7 @@ namespace IvanochJoseftest.Data
             StreamWriter sr = File.AppendText(@"Database//" + "KoT$" + PoddNamn + ".txt");
             sr.WriteLine(Kategori);
             sr.WriteLine(TimerIndex);
+            sr.WriteLine(url);
             feed.SaveAsRss20(writer);
             writer.Close();
             sr.Close();
