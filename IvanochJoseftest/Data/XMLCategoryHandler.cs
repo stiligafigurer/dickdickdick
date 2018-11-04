@@ -59,6 +59,7 @@ namespace IvanochJoseftest.Data
             return false;
             
         }
+        
 
         public static string[] ReadAllCategoriesFromXML()
         {
@@ -93,7 +94,12 @@ namespace IvanochJoseftest.Data
             }
             if(HasLine)
             {
-                foreach (var line in LinesToDelete)
+
+                var removeCat = from p in LinesToDelete
+                          select p;
+
+
+                foreach (var line in removeCat)
                 {
                     foreach (var item in ListOfCategories)
                     {
@@ -103,6 +109,7 @@ namespace IvanochJoseftest.Data
                         }
                     }
                 }
+                XMLHandler.ChangeKategoryToDefault(name);
                 File.WriteAllLines(("Kategorier.xml"), LinesToKeep.ToArray());
                 return true;
             }
