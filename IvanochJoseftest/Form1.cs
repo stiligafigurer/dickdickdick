@@ -190,6 +190,22 @@ namespace IvanochJoseftest
                 label5.Text += avsnitt + ":" + EpisodeName;
             }
         }
+
+        private void btnSparaKategori_Click(object sender, EventArgs e)
+        {
+            
+            tbKategori.Clear();
+            string nyttNamn = tbKategori.Text.ToString();
+
+            if (Validering.BytKatNamn(nyttNamn) && File.Exists("kategorier.xml"))
+            {
+                var kategori = lbKategori.SelectedItem.ToString();
+            }
+            
+
+         
+
+        }
         //private void Alarm5min()
         //{
         //    Timer t = new Timer();
