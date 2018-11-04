@@ -180,6 +180,7 @@ namespace IvanochJoseftest
             
             if (Validering.BytKatNamn(nyttNamn) && File.Exists("kategorier.xml"))
             {
+
                 var gammaltNamn = lbKategori.SelectedItem.ToString();
                 XMLHandler.ChangeKategoryName(gammaltNamn, nyttNamn);
                 XMLCategoryHandler.RemoveCategoryFromXML(gammaltNamn);
@@ -187,6 +188,7 @@ namespace IvanochJoseftest
                 ListBoxOnLoad();
                 FillCB();
              }
+
         }
  
         private void FetchAllPodcastOnLoad()
