@@ -138,6 +138,7 @@ namespace IvanochJoseftest
                 var ArrOfTokens = line.Split(SplitOn, StringSplitOptions.None);
                 cbKategori.Items.Add(ArrOfTokens[0]);
             }
+            cbKategori.Sorted = true;
         }
 
         private void btnTaBortKategori_Click_1(object sender, EventArgs e)
@@ -173,14 +174,21 @@ namespace IvanochJoseftest
 
         private void btnSparaKategori_Click(object sender, EventArgs e)
         {
-            
-            tbKategori.Clear();
-            string nyttNamn = tbKategori.Text.ToString();
 
+            //tbKategori.Clear();
+            string nyttNamn = tbKategori.Text;
+            
             if (Validering.BytKatNamn(nyttNamn) && File.Exists("kategorier.xml"))
             {
-                var kategori = lbKategori.SelectedItem.ToString();
-            }
+
+                var gammaltNamn = lbKategori.SelectedItem.ToString();
+                XMLHandler.ChangeKategoryName(gammaltNamn, nyttNamn);
+                XMLCategoryHandler.RemoveCategoryFromXML(gammaltNamn);
+                XMLCategoryHandler.WriteToXML(nyttNamn);
+                ListBoxOnLoad();
+                FillCB();
+             }
+
         }
  
         private void FetchAllPodcastOnLoad()
