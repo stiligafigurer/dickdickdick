@@ -88,6 +88,7 @@ namespace IvanochJoseftest
             this.lbKategori.Name = "lbKategori";
             this.lbKategori.Size = new System.Drawing.Size(268, 204);
             this.lbKategori.TabIndex = 3;
+            this.lbKategori.SelectedIndexChanged += new System.EventHandler(this.lbKategori_SelectedIndexChanged);
             // 
             // lvEpisodes
             // 

@@ -25,8 +25,12 @@ namespace IvanochJoseftest.Business
 
         private int TimerConverter(int timer)
         {
-            int MsTimer = (timer * 60) * 1000;
-            return MsTimer;
+            if (timer < 60)
+            {
+                int MsTimer = (timer * 60) * 1000;
+                return MsTimer;
+            }
+            else return timer;
         }
         public void SetInt(int newTime)
         {

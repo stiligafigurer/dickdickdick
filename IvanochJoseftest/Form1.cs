@@ -171,22 +171,6 @@ namespace IvanochJoseftest
             }
         }
 
-//        private void Alarm5min()
- //       {
- //           Timer t = new Timer();
-
-
-//            t.Interval = 5000; // specify interval time as you want
-//            t.Tick += new EventHandler(timer_Tick);
-//            t.Start();
- //       }
-
- //       void timer_Tick(object sender, EventArgs e)
- //       {
-  //          MessageBox.Show("Alarm alarm beep beep");
-   //     }
-
-
         private void FetchAllPodcastOnLoad()
         {
             DirectoryInfo d = new DirectoryInfo(@"Database//");
@@ -215,6 +199,21 @@ namespace IvanochJoseftest
             SetPodcastTimersOnLoad(listOfPodName.ToArray());
         }
 
+        private void DisplayPodcastByCategory(string Category)
+        {
+            List<string[]> listOfPodds = XMLHandler.GetPodcastsByCategory(Category);
+            foreach(var Array in listOfPodds)
+            {
+                ListViewItem item = new ListViewItem();
+                item.Text = Array[0];
+                item.SubItems.Add(Array[1]);
+                item.SubItems.Add(Array[2]);
+                item.SubItems.Add(Array[3]);
+                lvPodcast.Items.Clear();
+                lvPodcast.Items.Add(item);
+            }
+        }
+
         private void SetPodcastTimersOnLoad(string[] PoddNames)
         {
             foreach(var podd in PoddNames)
@@ -241,5 +240,13 @@ namespace IvanochJoseftest
             }
         }
 
+        private void lbKategori_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(lbKategori.SelectedItems.Count < 2)
+            {
+                DisplayPodcastByCategory(lbKategori.SelectedItem.ToString());
+            }
+            
+        }
     }
 }
