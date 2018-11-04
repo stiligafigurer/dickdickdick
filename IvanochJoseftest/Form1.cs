@@ -173,7 +173,7 @@ namespace IvanochJoseftest
 
         private void btnSparaKategori_Click(object sender, EventArgs e)
         {
-            
+
             tbKategori.Clear();
             string nyttNamn = tbKategori.Text.ToString();
 
@@ -181,6 +181,7 @@ namespace IvanochJoseftest
             {
                 var kategori = lbKategori.SelectedItem.ToString();
             }
+        }
  
         private void FetchAllPodcastOnLoad()
         {
