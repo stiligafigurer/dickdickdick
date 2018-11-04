@@ -95,11 +95,11 @@ namespace IvanochJoseftest.Data
             if(HasLine)
             {
 
-                var hej = from p in LinesToDelete
+                var removeCat = from p in LinesToDelete
                           select p;
 
 
-                foreach (var line in hej)
+                foreach (var line in removeCat)
                 {
                     foreach (var item in ListOfCategories)
                     {
