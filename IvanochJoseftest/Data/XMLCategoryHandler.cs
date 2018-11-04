@@ -104,7 +104,7 @@ namespace IvanochJoseftest.Data
                         }
                     }
                 }
-                XMLHandler.ChangeKategory(name);
+                XMLHandler.ChangeKategoryToDefault(name);
                 File.WriteAllLines(("Kategorier.xml"), LinesToKeep.ToArray());
                 return true;
             }
