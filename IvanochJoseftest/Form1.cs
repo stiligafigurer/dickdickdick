@@ -248,5 +248,27 @@ namespace IvanochJoseftest
             }
             
         }
+
+        private void btnSpara_Click(object sender, EventArgs e)
+        {
+            if(lvPodcast.SelectedItems.Count > 0 && lvPodcast.SelectedItems.Count < 1)
+            {
+                if(cbKategori.SelectedIndex != 0 && cbUppFrek.SelectedIndex != 0)
+                {
+                    string Namn = lvPodcast.SelectedItems[0].Text;
+                    string Kategori = cbKategori.SelectedItem.ToString();
+                    string UppFrek = cbUppFrek.SelectedItem.ToString();
+                    
+                }
+                else
+                {
+                    MessageBox.Show("Välj en ny kategori och uppdateringsfrekvens för podcasten");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Välj en podcast du vill redigera");
+            }
+        }
     }
 }

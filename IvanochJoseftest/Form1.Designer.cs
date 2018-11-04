@@ -196,6 +196,7 @@ namespace IvanochJoseftest
             this.btnSpara.TabIndex = 12;
             this.btnSpara.Text = "Spara";
             this.btnSpara.UseVisualStyleBackColor = true;
+            this.btnSpara.Click += new System.EventHandler(this.btnSpara_Click);
             // 
             // btnTaBortPodcast
             // 
