@@ -59,6 +59,7 @@ namespace IvanochJoseftest.Data
             return false;
             
         }
+        
 
         public static string[] ReadAllCategoriesFromXML()
         {
@@ -108,6 +109,7 @@ namespace IvanochJoseftest.Data
                         }
                     }
                 }
+                XMLHandler.ChangeKategoryToDefault(name);
                 File.WriteAllLines(("Kategorier.xml"), LinesToKeep.ToArray());
                 return true;
             }
