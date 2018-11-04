@@ -138,6 +138,7 @@ namespace IvanochJoseftest
                 var ArrOfTokens = line.Split(SplitOn, StringSplitOptions.None);
                 cbKategori.Items.Add(ArrOfTokens[0]);
             }
+            cbKategori.Sorted = true;
         }
 
         private void btnTaBortKategori_Click_1(object sender, EventArgs e)
@@ -170,17 +171,24 @@ namespace IvanochJoseftest
                 label5.Text += avsnitt + ":" + EpisodeName;
             }
         }
-
+        
         private void btnSparaKategori_Click(object sender, EventArgs e)
         {
 
-            tbKategori.Clear();
-            string nyttNamn = tbKategori.Text.ToString();
-
+            //tbKategori.Clear();
+            string nyttNamn = tbKategori.Text;
+            
             if (Validering.BytKatNamn(nyttNamn) && File.Exists("kategorier.xml"))
             {
-                var kategori = lbKategori.SelectedItem.ToString();
-            }
+
+                var gammaltNamn = lbKategori.SelectedItem.ToString();
+                XMLHandler.ChangeKategoryName(gammaltNamn, nyttNamn);
+                XMLCategoryHandler.RemoveCategoryFromXML(gammaltNamn);
+                XMLCategoryHandler.WriteToXML(nyttNamn);
+                ListBoxOnLoad();
+                FillCB();
+             }
+
         }
  
         private void FetchAllPodcastOnLoad()
@@ -211,6 +219,20 @@ namespace IvanochJoseftest
             SetPodcastTimersOnLoad(listOfPodName.ToArray());
         }
 
+        private void DisplayPodcastByCategory(string Category)
+        {
+            List<string[]> listOfPodds = XMLHandler.GetPodcastsByCategory(Category);
+            foreach(var Array in listOfPodds)
+            {
+                ListViewItem item = new ListViewItem();
+                item.Text = Array[0];
+                item.SubItems.Add(Array[1]);
+                item.SubItems.Add(Array[2]);
+                item.SubItems.Add(Array[3]);
+                lvPodcast.Items.Clear();
+                lvPodcast.Items.Add(item);
+            }
+        }
 
         private void SetPodcastTimersOnLoad(string[] PoddNames)
         {
@@ -236,6 +258,15 @@ namespace IvanochJoseftest
             {
                 MessageBox.Show("FEL!");
             }
+        }
+
+        private void lbKategori_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(lbKategori.SelectedItems.Count < 2)
+            {
+                DisplayPodcastByCategory(lbKategori.SelectedItem.ToString());
+            }
+            
         }
     }
 }

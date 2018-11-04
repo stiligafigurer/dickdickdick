@@ -69,6 +69,28 @@ namespace IvanochJoseftest.Data
             return arrOfPodInfo;
         }
 
+        public static List<string[]> GetPodcastsByCategory(string Category)
+        {
+            DirectoryInfo d = new DirectoryInfo(@"Database//");
+            FileInfo[] Files = d.GetFiles("KoT$*.txt");
+            List<string[]> ListOfPodcasts = new List<string[]>();
+            foreach (var file in Files)
+            {
+                StreamReader sr = new StreamReader(file.DirectoryName + "\\" + file.Name);
+                var SplitOn = new string[] { "\r\n" };
+                var ActualCategoryAndTimer = sr.ReadToEnd().Split(SplitOn, StringSplitOptions.None);
+                if (Category == ActualCategoryAndTimer[0])
+                {
+                    var name = file.Name;
+                    int length = name.Length - 8;
+                    name = name.Substring(4, length);
+                    var Podd = GetPodcast(name);
+                    ListOfPodcasts.Add(Podd);
+                }
+            }
+            return ListOfPodcasts;
+        }
+
         public static string GetEpisodeInfo(string PodName, string EpisodeName)
         {
             try
@@ -113,6 +135,27 @@ namespace IvanochJoseftest.Data
                     sw.Close();
                     File.WriteAllLines((file.DirectoryName + "\\" + file.Name), ActualCategoryAndTimer);
                 }
+                sr.Close();
+            }
+        }
+
+        public static void ChangeKategoryName(string oldCatName, string newCatName)
+        {
+            DirectoryInfo d = new DirectoryInfo(@"Database//");
+            FileInfo[] Files = d.GetFiles("KoT$*.txt");
+            foreach (var file in Files)
+            {
+                StreamReader sr = new StreamReader(file.DirectoryName + "\\" + file.Name);
+                var SplitOn = new string[] { "\r\n" };
+                var ActualCategoryAndTimer = sr.ReadToEnd().Split(SplitOn, StringSplitOptions.None);
+                if (oldCatName == ActualCategoryAndTimer[0])
+                {
+                    sr.Close();
+                    StreamWriter sw = new StreamWriter(file.DirectoryName + "\\" + file.Name);
+                    ActualCategoryAndTimer[0] = newCatName;
+                    sw.Close();
+                    File.WriteAllLines((file.DirectoryName + "\\" + file.Name), ActualCategoryAndTimer);
+                }
             }
         }
 
@@ -127,6 +170,7 @@ namespace IvanochJoseftest.Data
                     StreamReader sr = new StreamReader(file.DirectoryName + "\\" + file.Name);
                     var SplitOn = new string[] { "\r\n" };
                     var CategoryAndTimer = sr.ReadToEnd().Split(SplitOn, StringSplitOptions.None);
+                    sr.Close();
                     return Int32.Parse(CategoryAndTimer[1]);
                 }
                
@@ -145,6 +189,7 @@ namespace IvanochJoseftest.Data
                     StreamReader sr = new StreamReader(file.DirectoryName + "\\" + file.Name);
                     var SplitOn = new string[] { "\r\n" };
                     var CategoryAndTimer = sr.ReadToEnd().Split(SplitOn, StringSplitOptions.None);
+                    sr.Close();
                     return CategoryAndTimer[0];
                 }
 
@@ -163,6 +208,7 @@ namespace IvanochJoseftest.Data
                     StreamReader sr = new StreamReader(file.DirectoryName + "\\" + file.Name);
                     var SplitOn = new string[] { "\r\n" };
                     var CategoryAndTimer = sr.ReadToEnd().Split(SplitOn, StringSplitOptions.None);
+                    sr.Close();
                     return CategoryAndTimer[2];
                 }
 
