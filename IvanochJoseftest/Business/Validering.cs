@@ -66,5 +66,18 @@ namespace IvanochJoseftest.Business
                 return false;
             }
         }
+        public static bool BytKatNamn(string kategori)
+        {
+
+            if (kategori != "")
+            {
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Skriv in det nya namnet på kategorin som du vill ändra på.");
+                return false;
+            }
+        }
     }
 }

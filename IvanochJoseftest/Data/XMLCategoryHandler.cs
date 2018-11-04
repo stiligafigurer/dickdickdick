@@ -94,7 +94,12 @@ namespace IvanochJoseftest.Data
             }
             if(HasLine)
             {
-                foreach (var line in LinesToDelete)
+
+                var removeCat = from p in LinesToDelete
+                          select p;
+
+
+                foreach (var line in removeCat)
                 {
                     foreach (var item in ListOfCategories)
                     {
