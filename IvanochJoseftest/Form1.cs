@@ -181,6 +181,7 @@ namespace IvanochJoseftest
             {
                 var kategori = lbKategori.SelectedItem.ToString();
             }
+        }
  
         private void FetchAllPodcastOnLoad()
         {
