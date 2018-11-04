@@ -171,7 +171,7 @@ namespace IvanochJoseftest
                 label5.Text += avsnitt + ":" + EpisodeName;
             }
         }
-
+        
         private void btnSparaKategori_Click(object sender, EventArgs e)
         {
 
@@ -219,6 +219,20 @@ namespace IvanochJoseftest
             SetPodcastTimersOnLoad(listOfPodName.ToArray());
         }
 
+        private void DisplayPodcastByCategory(string Category)
+        {
+            List<string[]> listOfPodds = XMLHandler.GetPodcastsByCategory(Category);
+            foreach(var Array in listOfPodds)
+            {
+                ListViewItem item = new ListViewItem();
+                item.Text = Array[0];
+                item.SubItems.Add(Array[1]);
+                item.SubItems.Add(Array[2]);
+                item.SubItems.Add(Array[3]);
+                lvPodcast.Items.Clear();
+                lvPodcast.Items.Add(item);
+            }
+        }
 
         private void SetPodcastTimersOnLoad(string[] PoddNames)
         {
@@ -244,6 +258,15 @@ namespace IvanochJoseftest
             {
                 MessageBox.Show("FEL!");
             }
+        }
+
+        private void lbKategori_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(lbKategori.SelectedItems.Count < 2)
+            {
+                DisplayPodcastByCategory(lbKategori.SelectedItem.ToString());
+            }
+            
         }
     }
 }
