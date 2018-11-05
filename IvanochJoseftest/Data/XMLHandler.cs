@@ -159,6 +159,28 @@ namespace IvanochJoseftest.Data
             }
         }
 
+        public static void ChangeSinglePodCategory(string PodName, string newCatName)
+        {
+            DirectoryInfo d = new DirectoryInfo(@"Database//");
+            FileInfo[] Files = d.GetFiles("KoT$*.txt");
+            foreach (var file in Files)
+            {
+                var name = file.Name;
+                int length = name.Length - 8;
+                name = name.Substring(4, length);
+                if(name == PodName) { 
+                    StreamReader sr = new StreamReader(file.DirectoryName + "\\" + file.Name);
+                    var SplitOn = new string[] { "\r\n" };
+                    var ActualCategoryAndTimer = sr.ReadToEnd().Split(SplitOn, StringSplitOptions.None);
+                    sr.Close();
+                    StreamWriter sw = new StreamWriter(file.DirectoryName + "\\" + file.Name);
+                    ActualCategoryAndTimer[0] = newCatName;
+                    sw.Close();
+                    File.WriteAllLines((file.DirectoryName + "\\" + file.Name), ActualCategoryAndTimer);
+                }
+            }
+        }
+
         public static int GetPodcastTimer(string PoddNamn)
         {
             DirectoryInfo d = new DirectoryInfo(@"Database//");
@@ -176,6 +198,29 @@ namespace IvanochJoseftest.Data
                
             }
             throw new Exception();
+        }
+
+        public static void ChangeSinglePodTimer(string PodName, int NewTimer)
+        {
+            DirectoryInfo d = new DirectoryInfo(@"Database//");
+            FileInfo[] Files = d.GetFiles("KoT$*.txt");
+            foreach (var file in Files)
+            {
+                var name = file.Name;
+                int length = name.Length - 8;
+                name = name.Substring(4, length);
+                if (name == PodName)
+                {
+                    StreamReader sr = new StreamReader(file.DirectoryName + "\\" + file.Name);
+                    var SplitOn = new string[] { "\r\n" };
+                    var ActualCategoryAndTimer = sr.ReadToEnd().Split(SplitOn, StringSplitOptions.None);
+                    sr.Close();
+                    StreamWriter sw = new StreamWriter(file.DirectoryName + "\\" + file.Name);
+                    ActualCategoryAndTimer[1] = NewTimer.ToString();
+                    sw.Close();
+                    File.WriteAllLines((file.DirectoryName + "\\" + file.Name), ActualCategoryAndTimer);
+                }
+            }
         }
 
         public static string GetPodcastCategory(string PoddNamn)
