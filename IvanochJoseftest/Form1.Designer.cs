@@ -88,6 +88,7 @@ namespace IvanochJoseftest
             this.lbKategori.Name = "lbKategori";
             this.lbKategori.Size = new System.Drawing.Size(268, 204);
             this.lbKategori.TabIndex = 3;
+            this.lbKategori.SelectedIndexChanged += new System.EventHandler(this.lbKategori_SelectedIndexChanged);
             // 
             // lvEpisodes
             // 
@@ -196,6 +197,7 @@ namespace IvanochJoseftest
             this.btnSpara.TabIndex = 12;
             this.btnSpara.Text = "Spara";
             this.btnSpara.UseVisualStyleBackColor = true;
+            this.btnSpara.Click += new System.EventHandler(this.btnSpara_Click);
             // 
             // btnTaBortPodcast
             // 
@@ -233,6 +235,7 @@ namespace IvanochJoseftest
             this.Avsnitt,
             this.columnHeader3,
             this.columnHeader4});
+            this.lvPodcast.HideSelection = false;
             this.lvPodcast.Location = new System.Drawing.Point(18, 16);
             this.lvPodcast.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lvPodcast.Name = "lvPodcast";

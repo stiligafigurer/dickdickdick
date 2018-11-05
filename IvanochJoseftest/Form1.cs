@@ -19,6 +19,7 @@ namespace IvanochJoseftest
     {
 
         List<string> kategorier = new List<string>();
+        List<UpdateInterval> ListOfTimers = new List<UpdateInterval>();
         string SelectedPodcast = "";
 
         public Form1()
@@ -105,7 +106,8 @@ namespace IvanochJoseftest
                         break;
                 }
                 var nameAndNumOfEps = XMLHandler.GetPodcast(tbURL.Text, Kategori, TimerIndex);
-                UpdateInterval NewTmer = new UpdateInterval(TimerIndex, tbURL.Text, Kategori);
+                ListOfTimers.Add(
+                new UpdateInterval(nameAndNumOfEps[0], TimerIndex, tbURL.Text, Kategori));
                 string episodeCount = nameAndNumOfEps[0];
                 string name = nameAndNumOfEps[1];
                 lvPodcast.Items.Add(episodeCount).SubItems.Add(name);
@@ -138,6 +140,7 @@ namespace IvanochJoseftest
                 var ArrOfTokens = line.Split(SplitOn, StringSplitOptions.None);
                 cbKategori.Items.Add(ArrOfTokens[0]);
             }
+            cbKategori.Sorted = true;
         }
 
         private void btnTaBortKategori_Click_1(object sender, EventArgs e)
@@ -170,17 +173,24 @@ namespace IvanochJoseftest
                 label5.Text += avsnitt + ":" + EpisodeName;
             }
         }
-
+        
         private void btnSparaKategori_Click(object sender, EventArgs e)
         {
 
-            tbKategori.Clear();
-            string nyttNamn = tbKategori.Text.ToString();
-
+            //tbKategori.Clear();
+            string nyttNamn = tbKategori.Text;
+            
             if (Validering.BytKatNamn(nyttNamn) && File.Exists("kategorier.xml"))
             {
-                var kategori = lbKategori.SelectedItem.ToString();
-            }
+
+                var gammaltNamn = lbKategori.SelectedItem.ToString();
+                XMLHandler.ChangeKategoryName(gammaltNamn, nyttNamn);
+                XMLCategoryHandler.RemoveCategoryFromXML(gammaltNamn);
+                XMLCategoryHandler.WriteToXML(nyttNamn);
+                ListBoxOnLoad();
+                FillCB();
+             }
+
         }
  
         private void FetchAllPodcastOnLoad()
@@ -211,6 +221,20 @@ namespace IvanochJoseftest
             SetPodcastTimersOnLoad(listOfPodName.ToArray());
         }
 
+        private void DisplayPodcastByCategory(string Category)
+        {
+            List<string[]> listOfPodds = XMLHandler.GetPodcastsByCategory(Category);
+            foreach(var Array in listOfPodds)
+            {
+                ListViewItem item = new ListViewItem();
+                item.Text = Array[0];
+                item.SubItems.Add(Array[1]);
+                item.SubItems.Add(Array[2]);
+                item.SubItems.Add(Array[3]);
+                lvPodcast.Items.Clear();
+                lvPodcast.Items.Add(item);
+            }
+        }
 
         private void SetPodcastTimersOnLoad(string[] PoddNames)
         {
@@ -219,8 +243,7 @@ namespace IvanochJoseftest
                 int Timer = XMLHandler.GetPodcastTimer(podd);
                 string Category = XMLHandler.GetPodcastCategory(podd);
                 string Url = XMLHandler.GetPodcastUrl(podd);
-                new UpdateInterval(Timer, Url, Category);
-                
+                ListOfTimers.Add(new UpdateInterval(podd, Timer, Url, Category));
             }
         }
         
@@ -231,10 +254,75 @@ namespace IvanochJoseftest
                 var Namn = lvPodcast.SelectedItems[0].Text;
                 XMLPodcastHandler.RemoveXML(Namn);
                 lvPodcast.SelectedItems[0].Remove();
+                foreach(var item in ListOfTimers)
+                {
+                    if(item.PodName == Namn)
+                    {
+                        ListOfTimers.Remove(item);
+                    }
+                }
             }
             else
             {
                 MessageBox.Show("FEL!");
+            }
+        }
+
+        private void lbKategori_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(lbKategori.SelectedItems.Count > 0 && lbKategori.SelectedItems.Count < 2)
+            {
+                DisplayPodcastByCategory(lbKategori.SelectedItem.ToString());
+            }
+            
+        }
+
+        private void btnSpara_Click(object sender, EventArgs e)
+        {
+            if(lvPodcast.SelectedItems.Count > 0 && lvPodcast.SelectedItems.Count < 2)
+            {
+                if(cbKategori.SelectedIndex != 0 && cbUppFrek.SelectedIndex != 0)
+                {
+                    string Namn = lvPodcast.SelectedItems[0].Text;
+                    string Kategori = cbKategori.SelectedItem.ToString();
+                    int TimerIndex = 0;
+                    switch (cbUppFrek.SelectedIndex)
+                    {
+                        case 0:
+                            TimerIndex = 5;
+                            break;
+                        case 1:
+                            TimerIndex = 10;
+                            break;
+                        case 2:
+                            TimerIndex = 15;
+                            break;
+                        case 3:
+                            TimerIndex = 30;
+                            break;
+                    }
+                    string Url = "";
+                    XMLHandler.ChangeSinglePodCategory(Namn, Kategori);
+                    XMLHandler.ChangeSinglePodTimer(Namn, TimerIndex);
+                    foreach(var item in ListOfTimers)
+                    {
+                        if(item.PodName == Namn)
+                        {
+                            Url = item.Url;
+                            ListOfTimers.Remove(item);
+                            break;
+                        }
+                    }
+                    ListOfTimers.Add(new UpdateInterval(Namn, TimerIndex, Url, Kategori));
+                }
+                else
+                {
+                    MessageBox.Show("Välj en ny kategori och uppdateringsfrekvens för podcasten");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Välj en podcast du vill redigera");
             }
         }
     }

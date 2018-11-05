@@ -12,22 +12,28 @@ namespace IvanochJoseftest.Business
 {
     class UpdateInterval : Form1
     {
-        private string Url = "";
+        public string PodName { get; set; }
+        public string Url { get; set; }
         private string Kategori = "";
         private int Timer = 0;
 
-        public UpdateInterval(int time, string Url, string Kategori)
+        public UpdateInterval(string name, int time, string Url, string Kategori)
         {
             this.Url = Url;
             this.Kategori = Kategori;
             this.Timer = TimerConverter(time);
+            this.PodName = name;
             SetInt(Timer);
         }
 
         private int TimerConverter(int timer)
         {
-            int MsTimer = (timer * 60) * 1000;
-            return MsTimer;
+            if (timer < 60)
+            {
+                int MsTimer = (timer * 60) * 1000;
+                return MsTimer;
+            }
+            else return timer;
         }
         public void SetInt(int newTime)
         {
