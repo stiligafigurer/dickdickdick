@@ -235,6 +235,7 @@ namespace IvanochJoseftest
             this.Avsnitt,
             this.columnHeader3,
             this.columnHeader4});
+            this.lvPodcast.HideSelection = false;
             this.lvPodcast.Location = new System.Drawing.Point(18, 16);
             this.lvPodcast.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lvPodcast.Name = "lvPodcast";
