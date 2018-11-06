@@ -90,10 +90,6 @@ namespace IvanochJoseftest.Data
         {
             try
             {
-                //int EpisodeLength = EpisodeName.Length - 15;
-                //EpisodeName = EpisodeName.Substring(14, EpisodeLength);
-                //int PodLength = PodName.Length - 16;
-                //PodName = PodName.Substring(15, PodLength);
                 SyndicationFeed feed = XMLPodcastHandler.ReadFromXML(PodName);
                 foreach (var item in feed.Items)
                 {
@@ -107,13 +103,13 @@ namespace IvanochJoseftest.Data
                 }
                 return "Ingen information finns";
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                throw e;
+                return "Ingen information";
             }
         }
 
-        public static void ChangeKategoryToDefault(string QueryCategory)
+        public static void ChangeKategoryToAlla(string QueryCategory)
         {
             DirectoryInfo d = new DirectoryInfo(@"Database//");
             FileInfo[] Files = d.GetFiles("KoT$*.txt");
@@ -126,7 +122,7 @@ namespace IvanochJoseftest.Data
                 {
                     sr.Close();
                     StreamWriter sw = new StreamWriter(file.DirectoryName + "\\" + file.Name);
-                    ActualCategoryAndTimer[0] = "Default";
+                    ActualCategoryAndTimer[0] = "Alla";
                     sw.Close();
                     File.WriteAllLines((file.DirectoryName + "\\" + file.Name), ActualCategoryAndTimer);
                 }
@@ -192,7 +188,7 @@ namespace IvanochJoseftest.Data
                 }
                
             }
-            throw new Exception();
+            return 5;
         }
 
         public static void ChangeSinglePodTimer(string PodName, int NewTimer)
