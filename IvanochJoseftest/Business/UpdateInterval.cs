@@ -46,9 +46,9 @@ namespace IvanochJoseftest.Business
 
         }
 
-        public async void HandleTimerElapsed(object sender, ElapsedEventArgs e)
+        public void HandleTimerElapsed(object sender, ElapsedEventArgs e)
         {
-            await XMLHandler.GetPodcast(Url, Kategori, Timer);
+            XMLHandler.GetPodcast(Url, Kategori, Timer);
             FireEvent(sender, e);
         }
 

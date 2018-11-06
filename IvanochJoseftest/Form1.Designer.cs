@@ -55,6 +55,7 @@ namespace IvanochJoseftest
             this.cbKategori = new System.Windows.Forms.ComboBox();
             this.tbDescription = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.lblFetching = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button2
@@ -294,11 +295,20 @@ namespace IvanochJoseftest
             this.label5.Size = new System.Drawing.Size(0, 20);
             this.label5.TabIndex = 21;
             // 
+            // lblFetching
+            // 
+            this.lblFetching.AutoSize = true;
+            this.lblFetching.Location = new System.Drawing.Point(19, 189);
+            this.lblFetching.Name = "lblFetching";
+            this.lblFetching.Size = new System.Drawing.Size(0, 20);
+            this.lblFetching.TabIndex = 22;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1257, 832);
+            this.Controls.Add(this.lblFetching);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.tbDescription);
             this.Controls.Add(this.cbKategori);
@@ -359,6 +369,7 @@ namespace IvanochJoseftest
         public System.Windows.Forms.TextBox tbURL;
         private System.Windows.Forms.TextBox tbDescription;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label lblFetching;
     }
 }
 
