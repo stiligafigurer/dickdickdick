@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace IvanochJoseftest.Business
 {
-    class UpdateInterval : Form1
+    class UpdateInterval : TimerVirtual
     {
         public string PodName { get; set; }
         public string Url { get; set; }
@@ -26,7 +26,7 @@ namespace IvanochJoseftest.Business
             SetInt(Timer);
         }
 
-        private int TimerConverter(int timer)
+        public override int TimerConverter(int timer)
         {
             if (timer < 60)
             {
@@ -48,7 +48,6 @@ namespace IvanochJoseftest.Business
 
         public void HandleTimerElapsed(object sender, ElapsedEventArgs e)
         {
-            XMLHandler.GetPodcast(Url, Kategori, Timer);
             FireEvent(sender, e);
         }
 

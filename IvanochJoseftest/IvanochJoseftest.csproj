@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\InvokeAid.cs" />
+    <Compile Include="Business\TimerVirtual.cs" />
     <Compile Include="Business\UpdateInterval.cs" />
     <Compile Include="Data\ICountable.cs" />
     <Compile Include="Data\XMLCategoryHandler.cs" />

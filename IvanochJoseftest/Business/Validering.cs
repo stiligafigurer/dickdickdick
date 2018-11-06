@@ -11,72 +11,55 @@ namespace IvanochJoseftest.Business
 {
     class Validering
     {
-        public static bool IsFilled(string input)
+        public static void IsFilled(string type, string input)
         {
-            if (input != "")
+            if (input == "")
             {
-                return true;
-            }
-            else
-            {
-                throw new Exception();
-                return false;
+                Exception e = new ArgumentException(type + " är inte ifylld.");
+                throw e;
             }
         }
 
-        public static bool TrueURL(string url)
+        public static void TrueURL(string type, string url)
         {
             try
             {
                 XmlReader reader = XmlReader.Create(url);
                 SyndicationFeed feed = SyndicationFeed.Load(reader);
                 reader.Close();
-                return true;
             }
             catch
             {
-                MessageBox.Show("Skriv in en korrekt URL till en RSS-feed.");
-                return false;
+                Exception e = new ArgumentException(type, " är inte en fungerande url.");
+                throw e;
             }
         }
 
-        public static bool KategoriCheck(string kategori)
+        public static void KategoriCheck(string type, string kategori)
         {
 
-            if (kategori != "")
+            if (kategori == "")
             {
-                return true;
-            }
-            else
-            {
-                MessageBox.Show("Välj en kategori som podden ska tillhöra.");
-                return false;
+                Exception e = new ArgumentException(type, " är inte vald");
+                throw e; 
             }
         }
-        public static bool UppFrekCheck(string UppFrek)
-        {
 
-            if (UppFrek != "")
+        public static void UppFrekCheck(string type, string UppFrek)
+        {
+            if (UppFrek == "")
             {
-                return true;
-            }
-            else
-            {
-                MessageBox.Show("Välj uppdateringsfrekvens på podcasten.");
-                return false;
+                Exception e = new ArgumentException(type, " är inte vald");
+                throw e;
             }
         }
-        public static bool BytKatNamn(string kategori)
+        public static void BytKatNamn(string type, string kategori)
         {
 
-            if (kategori != "")
+            if (kategori == "")
             {
-                return true;
-            }
-            else
-            {
-                MessageBox.Show("Skriv in det nya namnet på kategorin som du vill ändra på.");
-                return false;
+                Exception e = new ArgumentException(type, " har inget värde. Skriv in ett kategorinamn");
+                throw e;
             }
         }
     }

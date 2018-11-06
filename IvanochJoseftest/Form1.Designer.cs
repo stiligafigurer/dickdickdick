@@ -30,7 +30,6 @@ namespace IvanochJoseftest
         /// </summary>
         private void InitializeComponent()
         {
-            this.button2 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.lbKategori = new System.Windows.Forms.ListBox();
             this.lvEpisodes = new System.Windows.Forms.ListView();
@@ -58,17 +57,6 @@ namespace IvanochJoseftest
             this.label6 = new System.Windows.Forms.Label();
             this.lblFetching = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(702, 31);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(115, 74);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "Click For Dick";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // label1
             // 
@@ -341,7 +329,6 @@ namespace IvanochJoseftest
             this.Controls.Add(this.lvEpisodes);
             this.Controls.Add(this.lbKategori);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.button2);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Form1";
             this.Text = "Form1";
@@ -357,7 +344,6 @@ namespace IvanochJoseftest
         }
 
         #endregion
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox lbKategori;
         private System.Windows.Forms.ListView lvEpisodes;
