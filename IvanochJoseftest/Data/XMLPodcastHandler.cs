@@ -44,7 +44,7 @@ namespace IvanochJoseftest.Data
             feed.SaveAsRss20(writer);
             writer.Close();
             sr.Close();
-        
+
             return true;
         }
 

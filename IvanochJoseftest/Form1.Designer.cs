@@ -34,9 +34,7 @@ namespace IvanochJoseftest
             this.label1 = new System.Windows.Forms.Label();
             this.lbKategori = new System.Windows.Forms.ListBox();
             this.lvEpisodes = new System.Windows.Forms.ListView();
-            this.Nummer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Namn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Datum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnNyKategori = new System.Windows.Forms.Button();
             this.btnSparaKategori = new System.Windows.Forms.Button();
             this.btnTaBortKategori = new System.Windows.Forms.Button();
@@ -58,6 +56,7 @@ namespace IvanochJoseftest
             this.tbDescription = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.lblFetching = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button2
@@ -95,10 +94,8 @@ namespace IvanochJoseftest
             // lvEpisodes
             // 
             this.lvEpisodes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Nummer,
-            this.Namn,
-            this.Datum});
-            this.lvEpisodes.Location = new System.Drawing.Point(11, 258);
+            this.Namn});
+            this.lvEpisodes.Location = new System.Drawing.Point(12, 322);
             this.lvEpisodes.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lvEpisodes.Name = "lvEpisodes";
             this.lvEpisodes.Size = new System.Drawing.Size(609, 266);
@@ -107,19 +104,10 @@ namespace IvanochJoseftest
             this.lvEpisodes.View = System.Windows.Forms.View.Details;
             this.lvEpisodes.SelectedIndexChanged += new System.EventHandler(this.lvEpisodes_SelectedIndexChanged);
             // 
-            // Nummer
-            // 
-            this.Nummer.Text = "Nummer";
-            // 
             // Namn
             // 
             this.Namn.Text = "Namn";
             this.Namn.Width = 188;
-            // 
-            // Datum
-            // 
-            this.Datum.Text = "Datum";
-            this.Datum.Width = 122;
             // 
             // btnNyKategori
             // 
@@ -304,13 +292,22 @@ namespace IvanochJoseftest
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(0, 17);
             this.label6.TabIndex = 22;
+
+            // lblFetching
+            // 
+            this.lblFetching.AutoSize = true;
+            this.lblFetching.Location = new System.Drawing.Point(19, 189);
+            this.lblFetching.Name = "lblFetching";
+            this.lblFetching.Size = new System.Drawing.Size(0, 20);
+            this.lblFetching.TabIndex = 22;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1117, 666);
             this.Controls.Add(this.label6);
+            this.ClientSize = new System.Drawing.Size(1257, 832);
+            this.Controls.Add(this.lblFetching);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.tbDescription);
             this.Controls.Add(this.cbKategori);
@@ -368,12 +365,11 @@ namespace IvanochJoseftest
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ComboBox cbUppFrek;
         private System.Windows.Forms.ComboBox cbKategori;
-        private System.Windows.Forms.ColumnHeader Nummer;
-        private System.Windows.Forms.ColumnHeader Datum;
         public System.Windows.Forms.TextBox tbURL;
         private System.Windows.Forms.TextBox tbDescription;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblFetching;
     }
 }
 

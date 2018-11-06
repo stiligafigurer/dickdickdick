@@ -19,7 +19,7 @@ namespace IvanochJoseftest.Business
             }
             else
             {
-                MessageBox.Show("Fältet får inte lämnas tomt!");
+                throw new Exception();
                 return false;
             }
         }
