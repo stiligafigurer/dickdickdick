@@ -243,6 +243,34 @@ namespace IvanochJoseftest
             SetPodcastTimersOnLoad(listOfPodName.ToArray());
         }
 
+        public void FetchAllPodcastOnLoadNoTimer()
+
+        {
+            DirectoryInfo d = new DirectoryInfo(@"Database//");
+            FileInfo[] Files = d.GetFiles("*.xml");
+            List<string> listOfPodName = new List<string>();
+            Dictionary<string, string[]> dict = new Dictionary<string, string[]>();
+            foreach (var file in Files)
+            {
+                int length = file.Name.Length - 4;
+                string namn = file.Name.Substring(0, length);
+                listOfPodName.Add(namn);
+            }
+            foreach (var item in listOfPodName)
+            {
+                dict.Add(item, XMLHandler.GetPodcast(item));
+            }
+            foreach (var thing in dict.Values)
+            {
+                ListViewItem item = new ListViewItem();
+                item.Text = thing[0];
+                item.SubItems.Add(thing[1]);
+                item.SubItems.Add(thing[2]);
+                item.SubItems.Add(thing[3]);
+                lvPodcast.Items.Add(item);
+            }
+        }
+
         public void FetchAllPodcasts(object obj, EventArgs e)
         {
             DirectoryInfo d = new DirectoryInfo(@"Database//");
@@ -270,7 +298,6 @@ namespace IvanochJoseftest
                 item.SubItems.Add(thing[3]);
                 this.UIThread(() => this.lvPodcast.Items.Add(item));
             }
-            SetPodcastTimersOnLoad(listOfPodName.ToArray());
         }
 
         private void DisplayPodcastByCategory(string Category)
@@ -291,7 +318,7 @@ namespace IvanochJoseftest
             }
             else
             {
-                FetchAllPodcastOnLoad();
+                FetchAllPodcastOnLoadNoTimer();
             }
         }
 
@@ -381,7 +408,7 @@ namespace IvanochJoseftest
                     }
                     ListOfTimers.Add(new UpdateInterval(Namn, TimerIndex, Url, Kategori));
                     lvPodcast.Items.Clear();
-                    FetchAllPodcastOnLoad();
+                    FetchAllPodcastOnLoadNoTimer();
                 }
                 else
                 {
