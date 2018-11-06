@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace IvanochJoseftest.Data
 {
-    interface IXMLReadWriteAble
+    interface ICountable
     {
-        string ReadFromXML(string keyword);
-        bool WriteToXML(string text);
+        //string ReadFromXML(string keyword);
+        //bool WriteToXML(string text);
+
+        void CountPods();
+
     }
 }

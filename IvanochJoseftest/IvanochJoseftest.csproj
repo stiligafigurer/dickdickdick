@@ -48,7 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business\UpdateInterval.cs" />
-    <Compile Include="Data\IXMLReadWriteAble.cs" />
+    <Compile Include="Data\ICountable.cs" />
     <Compile Include="Data\XMLCategoryHandler.cs" />
     <Compile Include="Business\Validering.cs" />
     <Compile Include="Data\XMLHandler.cs" />

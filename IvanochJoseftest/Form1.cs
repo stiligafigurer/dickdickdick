@@ -15,7 +15,7 @@ using IvanochJoseftest.Business;
 
 namespace IvanochJoseftest
 {
-    public partial class Form1 : Form
+    public partial class Form1 : Form, ICountable
     {
 
         List<string> kategorier = new List<string>();
@@ -37,8 +37,9 @@ namespace IvanochJoseftest
             ListBoxOnLoad();
             ComboBoxOnLoad();
             FetchAllPodcastOnLoad();
+            CountPods();
         }
-        
+
         private void lvPodcast_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             if (lvPodcast.SelectedItems.Count > 0)
@@ -53,7 +54,7 @@ namespace IvanochJoseftest
                     nameAndEpisode.TryGetValue(episodeNumber, out string name);
                     lvEpisodes.Items.Add(episodeNumber).SubItems.Add(name);
                 }
-
+                CountPods();
             }
         }
 
@@ -64,7 +65,10 @@ namespace IvanochJoseftest
 
             foreach (var item in listOfCategories)
             {
-                cbKategori.Items.Add(item);
+                if (item != "")
+                {
+                    cbKategori.Items.Add(item);
+                }
             }
         }
 
@@ -72,24 +76,24 @@ namespace IvanochJoseftest
         {
             if (Validering.IsFilled(tbKategori.Text))
             {
-                if(XMLCategoryHandler.WriteToXML(tbKategori.Text))
+                if (XMLCategoryHandler.WriteToXML(tbKategori.Text))
                 {
-                   lbKategori.Items.Add(tbKategori.Text);
+                    lbKategori.Items.Add(tbKategori.Text);
                 }
                 FillCB();
 
                 lbKategori.Sorted = true;
                 tbKategori.Clear();
-            
+
             }
         }
-        
+
         private void btnNyPodcast_Click(object sender, EventArgs e)
         {
-            
+
             if (Validering.IsFilled(tbURL.Text) && Validering.TrueURL(tbURL.Text) && Validering.KategoriCheck(cbKategori.Text) && Validering.UppFrekCheck(cbUppFrek.Text)) {
                 var Kategori = cbKategori.SelectedItem.ToString();
-                int TimerIndex = 0; 
+                int TimerIndex = 0;
                 switch (cbUppFrek.SelectedIndex)
                 {
                     case 0:
@@ -115,7 +119,7 @@ namespace IvanochJoseftest
                 tbURL.Clear();
 
             }
-
+            CountPods();
         }
 
         public void ListBoxOnLoad()
@@ -123,9 +127,11 @@ namespace IvanochJoseftest
 
             lbKategori.Items.Clear();
             var ArrOfCategories = XMLCategoryHandler.ReadAllCategoriesFromXML();
-            foreach(string item in ArrOfCategories)
+            foreach (string item in ArrOfCategories)
             {
-                lbKategori.Items.Add(item);
+                if (item != "") {
+                    lbKategori.Items.Add(item);
+                }
             }
             lbKategori.Sorted = true;
         }
@@ -133,12 +139,13 @@ namespace IvanochJoseftest
         public void ComboBoxOnLoad()
         {
 
-            string[] lineOfContents = File.ReadAllLines("Kategorier.xml");
+            string[] lineOfContents = XMLCategoryHandler.ReadAllCategoriesFromXML();
             foreach (var line in lineOfContents)
             {
-                var SplitOn = new string[] { "\r\n" };
-                var ArrOfTokens = line.Split(SplitOn, StringSplitOptions.None);
-                cbKategori.Items.Add(ArrOfTokens[0]);
+                if (line != "")
+                {
+                    cbKategori.Items.Add(line);
+                }
             }
             cbKategori.Sorted = true;
         }
@@ -164,22 +171,22 @@ namespace IvanochJoseftest
                 EpisodeName = EpisodeName.Substring(18, length);
 
                 var avsnitt = lvEpisodes.FocusedItem.Index;
-                
+
                 tbDescription.Clear();
                 tbDescription.AppendText(PodDesciption);
-                
-;
+
+                ;
                 label5.Text = "";
                 label5.Text += avsnitt + ":" + EpisodeName;
             }
         }
-        
+
         private void btnSparaKategori_Click(object sender, EventArgs e)
         {
 
             //tbKategori.Clear();
             string nyttNamn = tbKategori.Text;
-            
+
             if (Validering.BytKatNamn(nyttNamn) && File.Exists("kategorier.xml"))
             {
 
@@ -189,10 +196,10 @@ namespace IvanochJoseftest
                 XMLCategoryHandler.WriteToXML(nyttNamn);
                 ListBoxOnLoad();
                 FillCB();
-             }
+            }
 
         }
- 
+
         private void FetchAllPodcastOnLoad()
         {
             DirectoryInfo d = new DirectoryInfo(@"Database//");
@@ -205,7 +212,7 @@ namespace IvanochJoseftest
                 string namn = file.Name.Substring(0, length);
                 listOfPodName.Add(namn);
             }
-            foreach(var item in listOfPodName)
+            foreach (var item in listOfPodName)
             {
                 dict.Add(item, XMLHandler.GetPodcast(item));
             }
@@ -224,7 +231,7 @@ namespace IvanochJoseftest
         private void DisplayPodcastByCategory(string Category)
         {
             List<string[]> listOfPodds = XMLHandler.GetPodcastsByCategory(Category);
-            foreach(var Array in listOfPodds)
+            foreach (var Array in listOfPodds)
             {
                 ListViewItem item = new ListViewItem();
                 item.Text = Array[0];
@@ -238,7 +245,7 @@ namespace IvanochJoseftest
 
         private void SetPodcastTimersOnLoad(string[] PoddNames)
         {
-            foreach(var podd in PoddNames)
+            foreach (var podd in PoddNames)
             {
                 int Timer = XMLHandler.GetPodcastTimer(podd);
                 string Category = XMLHandler.GetPodcastCategory(podd);
@@ -246,17 +253,17 @@ namespace IvanochJoseftest
                 ListOfTimers.Add(new UpdateInterval(podd, Timer, Url, Category));
             }
         }
-        
+
         private void btnTaBortPodcast_Click(object sender, EventArgs e)
         {
-            if(lvPodcast.SelectedItems.Count > 0 && lvPodcast.SelectedItems.Count < 2)
+            if (lvPodcast.SelectedItems.Count > 0 && lvPodcast.SelectedItems.Count < 2)
             {
                 var Namn = lvPodcast.SelectedItems[0].Text;
                 XMLPodcastHandler.RemoveXML(Namn);
                 lvPodcast.SelectedItems[0].Remove();
-                foreach(var item in ListOfTimers)
+                foreach (var item in ListOfTimers)
                 {
-                    if(item.PodName == Namn)
+                    if (item.PodName == Namn)
                     {
                         ListOfTimers.Remove(item);
                     }
@@ -266,22 +273,23 @@ namespace IvanochJoseftest
             {
                 MessageBox.Show("FEL!");
             }
+            CountPods();
         }
 
         private void lbKategori_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(lbKategori.SelectedItems.Count > 0 && lbKategori.SelectedItems.Count < 2)
+            if (lbKategori.SelectedItems.Count > 0 && lbKategori.SelectedItems.Count < 2)
             {
                 DisplayPodcastByCategory(lbKategori.SelectedItem.ToString());
             }
-            
+
         }
 
         private void btnSpara_Click(object sender, EventArgs e)
         {
-            if(lvPodcast.SelectedItems.Count > 0 && lvPodcast.SelectedItems.Count < 2)
+            if (lvPodcast.SelectedItems.Count > 0 && lvPodcast.SelectedItems.Count < 2)
             {
-                if(cbKategori.SelectedIndex != 0 && cbUppFrek.SelectedIndex != 0)
+                if (cbKategori.SelectedIndex != 0 && cbUppFrek.SelectedIndex != 0)
                 {
                     string Namn = lvPodcast.SelectedItems[0].Text;
                     string Kategori = cbKategori.SelectedItem.ToString();
@@ -304,9 +312,9 @@ namespace IvanochJoseftest
                     string Url = "";
                     XMLHandler.ChangeSinglePodCategory(Namn, Kategori);
                     XMLHandler.ChangeSinglePodTimer(Namn, TimerIndex);
-                    foreach(var item in ListOfTimers)
+                    foreach (var item in ListOfTimers)
                     {
-                        if(item.PodName == Namn)
+                        if (item.PodName == Namn)
                         {
                             Url = item.Url;
                             ListOfTimers.Remove(item);
@@ -324,6 +332,16 @@ namespace IvanochJoseftest
             {
                 MessageBox.Show("Välj en podcast du vill redigera");
             }
+        }
+        public void CountPods() {
+           
+            for (int i = 0; i < lvPodcast.Items.Count; i++)
+            {
+                label6.Text = "";
+                label6.Text = "Antal podcasts i listan: " + (i + 1).ToString();
+            }
+           
+
         }
     }
 }
