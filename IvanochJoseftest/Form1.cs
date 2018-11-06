@@ -106,8 +106,8 @@ namespace IvanochJoseftest
                         TimerIndex = 30;
                         break;
                 }
-                Task<string[]> longRunningTask = XMLHandler.GetPodcast(tbURL.Text, Kategori, TimerIndex);
-                var nameAndNumOfEps = await longRunningTask;
+                Task<string[]> GetPodcast = XMLHandler.GetPodcast(tbURL.Text, Kategori, TimerIndex);
+                var nameAndNumOfEps = await GetPodcast;
                 ListOfTimers.Add(new UpdateInterval(nameAndNumOfEps[0], TimerIndex, tbURL.Text, Kategori));
                 string episodeCount = nameAndNumOfEps[0];
                 string name = nameAndNumOfEps[1];
