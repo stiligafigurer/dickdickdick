@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Business\InvokeAid.cs" />
     <Compile Include="Business\UpdateInterval.cs" />
     <Compile Include="Data\IXMLReadWriteAble.cs" />
     <Compile Include="Data\XMLCategoryHandler.cs" />

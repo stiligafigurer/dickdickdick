@@ -34,9 +34,7 @@ namespace IvanochJoseftest
             this.label1 = new System.Windows.Forms.Label();
             this.lbKategori = new System.Windows.Forms.ListBox();
             this.lvEpisodes = new System.Windows.Forms.ListView();
-            this.Nummer = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.Namn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.Datum = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btnNyKategori = new System.Windows.Forms.Button();
             this.btnSparaKategori = new System.Windows.Forms.Button();
             this.btnTaBortKategori = new System.Windows.Forms.Button();
@@ -93,9 +91,7 @@ namespace IvanochJoseftest
             // lvEpisodes
             // 
             this.lvEpisodes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.Nummer,
-            this.Namn,
-            this.Datum});
+            this.Namn});
             this.lvEpisodes.Location = new System.Drawing.Point(12, 322);
             this.lvEpisodes.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lvEpisodes.Name = "lvEpisodes";
@@ -105,19 +101,10 @@ namespace IvanochJoseftest
             this.lvEpisodes.View = System.Windows.Forms.View.Details;
             this.lvEpisodes.SelectedIndexChanged += new System.EventHandler(this.lvEpisodes_SelectedIndexChanged);
             // 
-            // Nummer
-            // 
-            this.Nummer.Text = "Nummer";
-            // 
             // Namn
             // 
             this.Namn.Text = "Namn";
             this.Namn.Width = 188;
-            // 
-            // Datum
-            // 
-            this.Datum.Text = "Datum";
-            this.Datum.Width = 122;
             // 
             // btnNyKategori
             // 
@@ -369,8 +356,6 @@ namespace IvanochJoseftest
         private System.Windows.Forms.ColumnHeader columnHeader4;
         private System.Windows.Forms.ComboBox cbUppFrek;
         private System.Windows.Forms.ComboBox cbKategori;
-        private System.Windows.Forms.ColumnHeader Nummer;
-        private System.Windows.Forms.ColumnHeader Datum;
         public System.Windows.Forms.TextBox tbURL;
         private System.Windows.Forms.TextBox tbDescription;
         private System.Windows.Forms.Label label5;

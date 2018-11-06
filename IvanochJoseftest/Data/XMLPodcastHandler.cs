@@ -28,7 +28,7 @@ namespace IvanochJoseftest.Data
             }
         }
 
-        public static bool WriteToXML(SyndicationFeed feed, string Kategori, int TimerIndex, string url)
+        public async static Task<bool> WriteToXML(SyndicationFeed feed, string Kategori, int TimerIndex, string url)
         {
             var PoddNamn = feed.Title.Text;
             var Path = @"Database//" + PoddNamn + ".xml";
@@ -38,13 +38,14 @@ namespace IvanochJoseftest.Data
                 File.Delete(@"Database//" + "KoT$" + PoddNamn + ".txt");
             }
             StreamWriter sr = File.AppendText(@"Database//" + "KoT$" + PoddNamn + ".txt");
+            await Task.Delay(10);
             sr.WriteLine(Kategori);
             sr.WriteLine(TimerIndex);
             sr.WriteLine(url);
             feed.SaveAsRss20(writer);
             writer.Close();
             sr.Close();
-        
+
             return true;
         }
 
