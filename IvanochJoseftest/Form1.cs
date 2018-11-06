@@ -37,9 +37,9 @@ namespace IvanochJoseftest
             ListBoxOnLoad();
             ComboBoxOnLoad();
             FetchAllPodcastOnLoad();
-            var MyTimer = new System.Timers.Timer(60000);
-            MyTimer.Start();
-            MyTimer.Elapsed += FetchAllPodcasts;
+            //var MyTimer = new System.Timers.Timer(60000);
+            //MyTimer.Start();
+            //MyTimer.Elapsed += FetchAllPodcasts;
         }
 
         private void lvPodcast_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
@@ -266,6 +266,10 @@ namespace IvanochJoseftest
                 string Category = XMLHandler.GetPodcastCategory(podd);
                 string Url = XMLHandler.GetPodcastUrl(podd);
                 ListOfTimers.Add(new UpdateInterval(podd, Timer, Url, Category));
+                for(int i = 0; i < ListOfTimers.Count(); i++)
+                {
+                    ListOfTimers[i].myEvent += FetchAllPodcasts;
+                }
 
             }
         }
@@ -350,6 +354,11 @@ namespace IvanochJoseftest
             {
                 MessageBox.Show("Välj en podcast du vill redigera");
             }
+        }
+
+        public void TimerElapsedUpdateLv(object sender, EventArgs e)
+        {
+            FetchAllPodcastOnLoad();
         }
     }
 }

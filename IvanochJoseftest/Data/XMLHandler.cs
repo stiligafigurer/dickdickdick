@@ -51,7 +51,14 @@ namespace IvanochJoseftest.Data
             string[] arrOfPodInfo = new string[4];
             arrOfPodInfo[0] = feed.Title.Text;
             arrOfPodInfo[1] = feed.Items.Count().ToString();
-            arrOfPodInfo[2] = KategoriOchTimer[1];
+            if (Int32.Parse(KategoriOchTimer[1]) > 100) 
+                {
+                arrOfPodInfo[2] = (Int32.Parse(KategoriOchTimer[1]) / 1000 / 60).ToString();
+            }
+            else
+            {
+                arrOfPodInfo[2] = KategoriOchTimer[1];
+            }
             arrOfPodInfo[3] = KategoriOchTimer[0];
             return arrOfPodInfo;
         }

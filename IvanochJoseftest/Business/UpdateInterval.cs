@@ -36,6 +36,8 @@ namespace IvanochJoseftest.Business
             else return timer;
         }
         
+        public event EventHandler myEvent;
+        
         public void SetInt(int newTime)
         {
             var timer = new System.Timers.Timer(newTime);
@@ -47,6 +49,12 @@ namespace IvanochJoseftest.Business
         public async void HandleTimerElapsed(object sender, ElapsedEventArgs e)
         {
             await XMLHandler.GetPodcast(Url, Kategori, Timer);
+            FireEvent(sender, e);
+        }
+
+        public void FireEvent(object sender, EventArgs e)
+        {
+            myEvent.Invoke(sender, e);
         }
     }
 
