@@ -368,14 +368,16 @@ namespace IvanochJoseftest
                 MessageBox.Show("Välj en podcast du vill redigera");
             }
         }
-        
-        public void CountPods() {
-           
+
+        public void CountPods()
+        {
+
             for (int i = 0; i < lvPodcast.Items.Count; i++)
             {
                 label6.Text = "";
                 label6.Text = "Antal podcasts i listan: " + (i + 1).ToString();
             }
+        }
 
         public async Task<bool> LblFetching()
         {
