@@ -24,14 +24,14 @@ namespace IvanochJoseftest.Data
             return ListOfEpisodes;
         }
 
-        public async static Task<string[]> GetPodcast(string url, string Kategori, int TimerIndex)
+        public static string[] GetPodcast(string url, string Kategori, int TimerIndex)
         {
             
             
             XmlReader reader = XmlReader.Create(url);
             SyndicationFeed feed = SyndicationFeed.Load(reader);
             reader.Close();
-            await XMLPodcastHandler.WriteToXML(feed, Kategori, TimerIndex, url);
+            XMLPodcastHandler.WriteToXML(feed, Kategori, TimerIndex, url);
             string[] arrOfPodInfo = new string[2];
             arrOfPodInfo[0] = feed.Title.Text;
             arrOfPodInfo[1] = feed.Items.Count().ToString();
@@ -73,6 +73,7 @@ namespace IvanochJoseftest.Data
                 StreamReader sr = new StreamReader(file.DirectoryName + "\\" + file.Name);
                 var SplitOn = new string[] { "\r\n" };
                 var ActualCategoryAndTimer = sr.ReadToEnd().Split(SplitOn, StringSplitOptions.None);
+                sr.Close();
                 if (Category == ActualCategoryAndTimer[0])
                 {
                     var name = file.Name;

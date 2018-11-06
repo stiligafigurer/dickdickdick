@@ -106,8 +106,7 @@ namespace IvanochJoseftest
                         TimerIndex = 30;
                         break;
                 }
-                Task<string[]> GetPodcast = XMLHandler.GetPodcast(tbURL.Text, Kategori, TimerIndex);
-                var nameAndNumOfEps = await GetPodcast;
+                var nameAndNumOfEps = XMLHandler.GetPodcast(tbURL.Text, Kategori, TimerIndex);
                 ListOfTimers.Add(new UpdateInterval(nameAndNumOfEps[0], TimerIndex, tbURL.Text, Kategori));
                 string episodeCount = nameAndNumOfEps[0];
                 string name = nameAndNumOfEps[1];
@@ -119,6 +118,9 @@ namespace IvanochJoseftest
                 lvPodcast.Items.Add(item);
                 FillCB();
                 tbURL.Clear();
+                Task<bool> longRunningTask = LblFetching();
+                await longRunningTask;
+                lblFetching.Text = "";
             }
         }
 
@@ -356,9 +358,11 @@ namespace IvanochJoseftest
             }
         }
 
-        public void TimerElapsedUpdateLv(object sender, EventArgs e)
+        public async Task<bool> LblFetching()
         {
-            FetchAllPodcastOnLoad();
+            lblFetching.Text = "Hämtar Podcast";
+            await Task.Delay(1000);
+            return true;
         }
     }
 }
