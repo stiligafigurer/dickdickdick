@@ -55,15 +55,16 @@ namespace IvanochJoseftest
             this.cbKategori = new System.Windows.Forms.ComboBox();
             this.tbDescription = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.lblFetching = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(702, 31);
+            this.button2.Location = new System.Drawing.Point(624, 25);
             this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(115, 74);
+            this.button2.Size = new System.Drawing.Size(102, 59);
             this.button2.TabIndex = 0;
             this.button2.Text = "Click For Dick";
             this.button2.UseVisualStyleBackColor = true;
@@ -72,20 +73,21 @@ namespace IvanochJoseftest
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(821, 11);
+            this.label1.Location = new System.Drawing.Point(730, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(86, 20);
+            this.label1.Size = new System.Drawing.Size(78, 17);
             this.label1.TabIndex = 1;
             this.label1.Text = "Kategorier:";
             // 
             // lbKategori
             // 
             this.lbKategori.FormattingEnabled = true;
-            this.lbKategori.ItemHeight = 20;
-            this.lbKategori.Location = new System.Drawing.Point(825, 36);
-            this.lbKategori.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.lbKategori.ItemHeight = 16;
+            this.lbKategori.Items.AddRange(new object[] {
+            ""});
+            this.lbKategori.Location = new System.Drawing.Point(733, 29);
             this.lbKategori.Name = "lbKategori";
-            this.lbKategori.Size = new System.Drawing.Size(268, 204);
+            this.lbKategori.Size = new System.Drawing.Size(239, 164);
             this.lbKategori.TabIndex = 3;
             this.lbKategori.SelectedIndexChanged += new System.EventHandler(this.lbKategori_SelectedIndexChanged);
             // 
@@ -96,7 +98,7 @@ namespace IvanochJoseftest
             this.lvEpisodes.Location = new System.Drawing.Point(12, 322);
             this.lvEpisodes.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lvEpisodes.Name = "lvEpisodes";
-            this.lvEpisodes.Size = new System.Drawing.Size(685, 332);
+            this.lvEpisodes.Size = new System.Drawing.Size(609, 266);
             this.lvEpisodes.TabIndex = 4;
             this.lvEpisodes.UseCompatibleStateImageBehavior = false;
             this.lvEpisodes.View = System.Windows.Forms.View.Details;
@@ -109,10 +111,9 @@ namespace IvanochJoseftest
             // 
             // btnNyKategori
             // 
-            this.btnNyKategori.Location = new System.Drawing.Point(825, 285);
-            this.btnNyKategori.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnNyKategori.Location = new System.Drawing.Point(733, 228);
             this.btnNyKategori.Name = "btnNyKategori";
-            this.btnNyKategori.Size = new System.Drawing.Size(84, 29);
+            this.btnNyKategori.Size = new System.Drawing.Size(75, 23);
             this.btnNyKategori.TabIndex = 5;
             this.btnNyKategori.Text = "Ny kategori";
             this.btnNyKategori.UseVisualStyleBackColor = true;
@@ -120,10 +121,9 @@ namespace IvanochJoseftest
             // 
             // btnSparaKategori
             // 
-            this.btnSparaKategori.Location = new System.Drawing.Point(917, 284);
-            this.btnSparaKategori.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnSparaKategori.Location = new System.Drawing.Point(815, 227);
             this.btnSparaKategori.Name = "btnSparaKategori";
-            this.btnSparaKategori.Size = new System.Drawing.Size(84, 29);
+            this.btnSparaKategori.Size = new System.Drawing.Size(75, 23);
             this.btnSparaKategori.TabIndex = 6;
             this.btnSparaKategori.Text = "Spara";
             this.btnSparaKategori.UseVisualStyleBackColor = true;
@@ -131,10 +131,9 @@ namespace IvanochJoseftest
             // 
             // btnTaBortKategori
             // 
-            this.btnTaBortKategori.Location = new System.Drawing.Point(1009, 284);
-            this.btnTaBortKategori.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnTaBortKategori.Location = new System.Drawing.Point(897, 227);
             this.btnTaBortKategori.Name = "btnTaBortKategori";
-            this.btnTaBortKategori.Size = new System.Drawing.Size(84, 29);
+            this.btnTaBortKategori.Size = new System.Drawing.Size(75, 23);
             this.btnTaBortKategori.TabIndex = 7;
             this.btnTaBortKategori.Text = "Ta bort";
             this.btnTaBortKategori.UseVisualStyleBackColor = true;
@@ -142,35 +141,32 @@ namespace IvanochJoseftest
             // 
             // tbKategori
             // 
-            this.tbKategori.Location = new System.Drawing.Point(825, 250);
-            this.tbKategori.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tbKategori.Location = new System.Drawing.Point(733, 200);
             this.tbKategori.Name = "tbKategori";
-            this.tbKategori.Size = new System.Drawing.Size(268, 26);
+            this.tbKategori.Size = new System.Drawing.Size(239, 22);
             this.tbKategori.TabIndex = 8;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 220);
+            this.label2.Location = new System.Drawing.Point(13, 176);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(46, 20);
+            this.label2.Size = new System.Drawing.Size(40, 17);
             this.label2.TabIndex = 9;
             this.label2.Text = "URL:";
             // 
             // tbURL
             // 
-            this.tbURL.Location = new System.Drawing.Point(18, 250);
-            this.tbURL.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tbURL.Location = new System.Drawing.Point(16, 200);
             this.tbURL.Name = "tbURL";
-            this.tbURL.Size = new System.Drawing.Size(273, 26);
+            this.tbURL.Size = new System.Drawing.Size(243, 22);
             this.tbURL.TabIndex = 10;
             // 
             // btnNyPodcast
             // 
-            this.btnNyPodcast.Location = new System.Drawing.Point(348, 288);
-            this.btnNyPodcast.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnNyPodcast.Location = new System.Drawing.Point(309, 230);
             this.btnNyPodcast.Name = "btnNyPodcast";
-            this.btnNyPodcast.Size = new System.Drawing.Size(99, 29);
+            this.btnNyPodcast.Size = new System.Drawing.Size(88, 23);
             this.btnNyPodcast.TabIndex = 11;
             this.btnNyPodcast.Text = "Ny Podcast";
             this.btnNyPodcast.UseVisualStyleBackColor = true;
@@ -178,10 +174,9 @@ namespace IvanochJoseftest
             // 
             // btnSpara
             // 
-            this.btnSpara.Location = new System.Drawing.Point(453, 288);
-            this.btnSpara.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnSpara.Location = new System.Drawing.Point(403, 230);
             this.btnSpara.Name = "btnSpara";
-            this.btnSpara.Size = new System.Drawing.Size(84, 29);
+            this.btnSpara.Size = new System.Drawing.Size(75, 23);
             this.btnSpara.TabIndex = 12;
             this.btnSpara.Text = "Spara";
             this.btnSpara.UseVisualStyleBackColor = true;
@@ -189,10 +184,9 @@ namespace IvanochJoseftest
             // 
             // btnTaBortPodcast
             // 
-            this.btnTaBortPodcast.Location = new System.Drawing.Point(543, 288);
-            this.btnTaBortPodcast.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnTaBortPodcast.Location = new System.Drawing.Point(483, 230);
             this.btnTaBortPodcast.Name = "btnTaBortPodcast";
-            this.btnTaBortPodcast.Size = new System.Drawing.Size(84, 29);
+            this.btnTaBortPodcast.Size = new System.Drawing.Size(75, 23);
             this.btnTaBortPodcast.TabIndex = 13;
             this.btnTaBortPodcast.Text = "Ta bort";
             this.btnTaBortPodcast.UseVisualStyleBackColor = true;
@@ -201,18 +195,18 @@ namespace IvanochJoseftest
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(307, 220);
+            this.label3.Location = new System.Drawing.Point(273, 176);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(169, 20);
+            this.label3.Size = new System.Drawing.Size(151, 17);
             this.label3.TabIndex = 14;
             this.label3.Text = "Uppdateringsfrekvens:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(488, 220);
+            this.label4.Location = new System.Drawing.Point(434, 176);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(72, 20);
+            this.label4.Size = new System.Drawing.Size(65, 17);
             this.label4.TabIndex = 15;
             this.label4.Text = "Kategori:";
             // 
@@ -224,10 +218,9 @@ namespace IvanochJoseftest
             this.columnHeader3,
             this.columnHeader4});
             this.lvPodcast.HideSelection = false;
-            this.lvPodcast.Location = new System.Drawing.Point(18, 16);
-            this.lvPodcast.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.lvPodcast.Location = new System.Drawing.Point(16, 13);
             this.lvPodcast.Name = "lvPodcast";
-            this.lvPodcast.Size = new System.Drawing.Size(589, 165);
+            this.lvPodcast.Size = new System.Drawing.Size(524, 133);
             this.lvPodcast.TabIndex = 16;
             this.lvPodcast.UseCompatibleStateImageBehavior = false;
             this.lvPodcast.View = System.Windows.Forms.View.Details;
@@ -260,41 +253,46 @@ namespace IvanochJoseftest
             "Var 10:e minut",
             "Var 15:e minut",
             "Var 30:e minut"});
-            this.cbUppFrek.Location = new System.Drawing.Point(310, 248);
-            this.cbUppFrek.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cbUppFrek.Location = new System.Drawing.Point(276, 198);
             this.cbUppFrek.Name = "cbUppFrek";
-            this.cbUppFrek.Size = new System.Drawing.Size(136, 28);
+            this.cbUppFrek.Size = new System.Drawing.Size(121, 24);
             this.cbUppFrek.TabIndex = 17;
             // 
             // cbKategori
             // 
             this.cbKategori.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbKategori.FormattingEnabled = true;
-            this.cbKategori.Location = new System.Drawing.Point(492, 250);
-            this.cbKategori.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.cbKategori.Location = new System.Drawing.Point(437, 200);
             this.cbKategori.Name = "cbKategori";
-            this.cbKategori.Size = new System.Drawing.Size(136, 28);
+            this.cbKategori.Size = new System.Drawing.Size(121, 24);
             this.cbKategori.TabIndex = 18;
             // 
             // tbDescription
             // 
-            this.tbDescription.Location = new System.Drawing.Point(825, 350);
-            this.tbDescription.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.tbDescription.Location = new System.Drawing.Point(733, 280);
             this.tbDescription.Multiline = true;
             this.tbDescription.Name = "tbDescription";
             this.tbDescription.ReadOnly = true;
-            this.tbDescription.Size = new System.Drawing.Size(384, 304);
+            this.tbDescription.Size = new System.Drawing.Size(342, 244);
             this.tbDescription.TabIndex = 20;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(821, 322);
+            this.label5.Location = new System.Drawing.Point(730, 258);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(0, 20);
+            this.label5.Size = new System.Drawing.Size(0, 17);
             this.label5.TabIndex = 21;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(384, 149);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(0, 17);
+            this.label6.TabIndex = 22;
+
             // lblFetching
             // 
             this.lblFetching.AutoSize = true;
@@ -305,8 +303,9 @@ namespace IvanochJoseftest
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.label6);
             this.ClientSize = new System.Drawing.Size(1257, 832);
             this.Controls.Add(this.lblFetching);
             this.Controls.Add(this.label5);
@@ -369,6 +368,7 @@ namespace IvanochJoseftest
         public System.Windows.Forms.TextBox tbURL;
         private System.Windows.Forms.TextBox tbDescription;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label lblFetching;
     }
 }
